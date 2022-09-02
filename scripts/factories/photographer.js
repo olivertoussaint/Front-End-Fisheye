@@ -17,7 +17,7 @@ function photographerFactory(data) {
         const cardPrice = document.createElement('p');
 
         cardLink.setAttribute("role", "link");
-        cardLink.setAttribute("href", "http://127.0.0.1:5500/Front-End-Fisheye/photographer.html");
+        cardLink.setAttribute("href", "http://127.0.0.1:5500/photographer.html");
         cardImg.setAttribute("src", picture);
         cardImg.setAttribute("alt", "#");
 
