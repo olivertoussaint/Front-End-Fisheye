@@ -5,22 +5,45 @@ function homePhotographerFactory(data) {
   
       
       function getDetailedPageDOM() {
-        const contact = document.querySelector('.btn-contact');
-        contact.innerHTML = `Contactez-moi ${name}`;
-
-
+        const main = document.querySelector('.main')
+        const banner = document.createElement('div');
         const bannerBody = document.createElement('div');
+        const bannerTitle = document.createElement('h1');
+        const bannerLocation = document.createElement('p');
+        const bannerTagline = document.createElement('p');
         const bannerButton = document.createElement('button');
-        const bannerImg = document.createElement('div');
-        const img = document.createElement('img');
+        const bannerImage = document.createElement('img');
+        const bannerImg   = document.createElement('div')
 
-        img.setAttribute("src", picture);
-        img.setAttribute("alt", name)
-          
-        bannerButton.appendChild(bannerBody);
-        bannerImg.appendChild(bannerBody)
+        main.setAttribute("aria-hidden", false);
+        banner.setAttribute("role", "banner");
+        bannerImage.setAttribute("src", picture);
+        bannerImage.setAttribute("alt", `${name}`);
+        bannerButton.type = "button";
+        bannerButton.innerHTML = "contactez-moi";
 
-          return (bannerBody);
+        bannerTitle.textContent = name;
+        bannerLocation.textContent = city + ', ' + country;
+        bannerTagline.textContent = tagline;
+
+        banner.classList.add("banner");
+        bannerBody.classList.add('banner-body');
+        bannerLocation.classList.add("banner-location");
+        bannerImg.classList.add('banner-img');
+        bannerTitle.classList.add('banner-title');
+        bannerTagline.classList.add('banner-tagline');
+        bannerButton.classList.add('btn-banner');
+
+        main.appendChild(banner);
+        main.appendChild(bannerBody);
+        banner.appendChild(bannerBody);
+        bannerBody.appendChild(bannerTitle);
+        bannerBody.appendChild(bannerLocation);
+        bannerBody.appendChild(bannerTagline);
+        bannerBody.appendChild(bannerImg);
+        bannerImg.append(bannerImage)
+        bannerBody.append(bannerButton);
+        return (main);
       }
   
       return { id, name, picture, city, tagline, country, price, getDetailedPageDOM }

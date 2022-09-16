@@ -8,7 +8,38 @@
     margin: 0 100px;
 }
 
-.btn-contact {
+.banner {
+    display: flex;
+    flex-flow: row wrap;
+}
+.banner-body {
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.banner-title {
+    margin: 0 100px 0 0;
+    color: #d3573c;
+}
+
+.banner-location, .banner-tagline {
+    margin: 0;
+}
+
+.banner-location {
+    color: #901c1c;
+}
+
+.banner-img img {
+    position: relative;
+    float: right;
+    top: -95px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.btn-contact, .btn-banner {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -19,6 +50,17 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.btn-banner {
+    position: absolute;
+    top: 124px;
+    left: 41%;
+}
+
+.btn-banner:hover {
+    background-color: #d3573c;
+    color: rgb(17, 16, 16);
 }
 
 .modal {

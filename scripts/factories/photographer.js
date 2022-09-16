@@ -37,13 +37,13 @@ function photographerFactory(data) {
 
         cardPhotographer.appendChild(photographerCardHeader);
         cardPhotographer.appendChild(cardBody);
+        cardPhotographer.appendChild(photographerCardFooter);
         photographerCardHeader.appendChild(cardLink);
         cardLink.appendChild(cardImg);
         cardLink.appendChild(cardTitle);
         cardBody.append(cardLocation);
         cardBody.append(cardTagline);
         cardBody.append(cardPrice);
-        cardPhotographer.appendChild(photographerCardFooter);
         
         return (cardPhotographer);
     }
