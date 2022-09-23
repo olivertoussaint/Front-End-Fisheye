@@ -5,9 +5,43 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/icons/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6995ef9b38.js" crossorigin="anonymous"></script>
     <title>Fisheye - photographe </title>
   </head>
   <body>
+
+    <section class="dialog" role="dialog" aria-labelledby="title">
+      <div class="dialog-windows">
+          <div class="modal-header">
+              <h1 class="modal-title" id="title"></h1>
+              <button title="fermer la modale" class="close-btn"><em class="modal-close fas fa-times"></em></button>
+          </div>
+          <form class="modal-form" id="contact">
+              <label for="prenom">Prénom</label>
+              <input class="firstName-inp" id="prenom" type="text" name="first-Name" aria-label="Entrez votre prenom"
+                  aria-required="true" />
+              <span class="message-alert">Vous devez entrer votre prénom !</span>
+              <label for="nom">Nom</label>
+              <input class="lastName-inp" id="nom" type="text" name="last-Name" aria-label="Entrez votre nom"
+                  aria-required="true" />
+              <span class=" message-alert">Vous devez entrer votre nom !</span>
+              <label for="email">Email<br /></label>
+              <input class="email-inp" id="email" type="email" name="email" aria-label="entrez votre mail"
+                  aria-required="true" />
+              <span class="message-alert">Vous devez entrer un Email valide !
+              </span>
+              <label for="msg">Votre Message<br /></label>
+              <textarea class="msg-inp" id="msg" name="message" aria-required="true"></textarea>
+              <span class="message-alert">Votre devez entrer un message ! </span>
+              <button class="submit-form" type="submit" value="Envoyer" name="Email" aria-label="Envoyer le message">
+                  Envoyer
+              </button>
+          </form>
+      </div>
+      <div class="dialog-mask"></div>
+  </section>
+
+
     <header>
       <div class="header-top">
         <a href="./index.html" title="retour à la page d'accueil" id="backToHomePage">
@@ -16,36 +50,12 @@
       </div>
     </header>
     <main class="main">
-      
+          
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label for="firstName">Prénom</label>
-						<input type="text" id="firstName" name="user_firstName" />
-					</div>
-          <div>
-            <label for="lastName">Nom</label>
-            <input type="text" id="lastName" name="user_lastName" />
-          </div>
-          <div>
-            <label for="mail">Email</label>
-            <input type="email" id="mail" name="user_mail">
-          </div>
-          <div>
-            <label for="msg">Votre message</label>
-            <textarea name="user_message"></textarea>
-          </div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+    
+    
     <script src="/scripts/factories/homePhotographer.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
+    <script src="/scripts/factories/pagePhotographer/mediaFactory.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
 </html>
