@@ -47,6 +47,7 @@ h1 {
     color: #D3573C;
     font-size: 1.5rem;
 }
+
 .card-location {
     color: #901C1C;
     margin-top: 85px;
@@ -63,13 +64,20 @@ h1 {
     cursor: pointer;
 }
 
+.card-img:hover {
+    box-shadow: 0 0.625rem 0.625rem olive;
+}
+
 .card-photographer-link {
     text-decoration: none;
-    transition: all .4s ease-out;
+	filter: sepia(0);
+	transition: .3s ease-in-out;
 }
 
 .card-photographer-link:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
+	filter: sepia(100%);
+	transition: .3s ease-in-out;
 }
 
 .card-body {
@@ -96,13 +104,38 @@ h1 {
     margin-bottom: 35px;
 }
 
-/* .tag-link {
-    width: 100px;
-    position: relative;
-    top: -20px;
-    color: #901c1c;
-    border: 1px solid #c4c4c4;
-    border-radius: 5px;
-    padding: 2px 5px;
-    cursor: pointer;
-} */
+@media screen and (max-width: 900px) {
+   .photographer_section {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+   }
+}
+@media screen and (max-width: 600px) {
+    .photographer_section {
+     grid-template-columns: 1fr;
+     gap: 30px;
+    }
+    .logo {
+        height: 35px;
+        margin-left: 5px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        margin-right: 0;
+    }  
+}
+
+ @media screen and (max-width: 420px) {
+    .logo {
+        height: 25px;
+        margin-left: 5px;
+    }
+    h1 {
+        font-size: 1rem;
+    }
+ }

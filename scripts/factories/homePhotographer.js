@@ -3,7 +3,7 @@ function homePhotographerFactory(data) {
   
       const picture = `assets/photographers_ID-photos/${portrait}`;
     
-      function getDetailedPageDOM() {
+      function getUserCardDOM() {
         const main = document.querySelector('.main');
         const banner = document.createElement('div');
         const bannerBody = document.createElement('div');
@@ -19,8 +19,8 @@ function homePhotographerFactory(data) {
         const sort = document.createElement('h3');
         sort.setAttribute("id", "sortBy"); 
 
-        const dropDown = document.createElement('div');
-        dropDown.classList.add('dropdown-menu');
+        const dropDownMenu = document.createElement('div');
+        dropDownMenu.classList.add('dropdown-menu');
 
         const filterSelect = document.createElement('div');
         filterSelect.classList.add('filter-select');
@@ -56,16 +56,15 @@ function homePhotographerFactory(data) {
         filterOptions.classList.add("filter-options-container");
         filterOptions.setAttribute("role", "listbox");
         filterOptions.setAttribute("id", "filter-options");
-        // filterOptions.innerHTML = `<i class="fas fa-angle-down"></i>`;
 
         const filterOptionSelected = document.createElement('a');
-        filterOptionSelected.classList.add("filter-options");
+        filterOptionSelected.classList.add("filter-option");
         filterOptionSelected.classList.add("selected");
         filterOptionSelected.setAttribute("data-value", "popularite");
         filterOptionSelected.setAttribute("aria-selected", "true");
         filterOptionSelected.setAttribute("aria-label", "Trier par popularité");
         filterOptionSelected.setAttribute("role", "option");
-        filterOptionSelected.textContent = "Popularité"+ `<i class="fas fa-angle-down"></i>`;
+        filterOptionSelected.textContent = "Popularité";
 
 
         const filterOption1 = document.createElement('a');
@@ -98,8 +97,8 @@ function homePhotographerFactory(data) {
         cardMediaImg.setAttribute("href", "#");
 
         const buttonModal = document.createElement('button');
-        buttonModal.classList.add("btn-modal-mobile");
-        buttonModal.classList.add("contact-btn");
+        buttonModal.classList.add("modal-btn-mobile");
+        buttonModal.classList.add("modal-btn");
         buttonModal.textContent = "Contactez-moi";
 
         const openModal = document.createElement('span');
@@ -111,7 +110,7 @@ function homePhotographerFactory(data) {
         bannerImg.classList.add('banner-img');
         bannerTitle.classList.add('banner-title');
         bannerTagline.classList.add('banner-tagline');
-        bannerButton.classList.add('btn-banner');
+        bannerButton.classList.add('banner-btn');
 
         const totalLikesContainer = document.createElement('div');
         totalLikesContainer.classList.add('total-likes-container');
@@ -137,9 +136,9 @@ function homePhotographerFactory(data) {
         priceContainer.appendChild(price);
 
         filterSection.appendChild(sort);
-        filterSection.appendChild(dropDown);
+        filterSection.appendChild(dropDownMenu);
 
-        dropDown.appendChild(filterSelect);
+        dropDownMenu.appendChild(filterSelect);
         filterSelect.appendChild(filterLink);
         filterLink.appendChild(span);
         filterLink.appendChild(arrow);
@@ -165,7 +164,7 @@ function homePhotographerFactory(data) {
         return (main);
       }
   
-      return { id, name, picture, city, tagline, country, price, getDetailedPageDOM }
+      return { id, name, picture, city, tagline, country, price, getUserCardDOM }
 
       
     }

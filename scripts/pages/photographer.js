@@ -600,17 +600,14 @@ async function getMedias() {
 }
 
 async function displayData(photographers) {
-    const photographerMain = document.querySelector(".main");
-    let params = new URLSearchParams(document.location.search);
-    let id = Number(params.get("id"));
-    console.log(photographers);
-    const photographer = photographers.find((el) => el.id === id);
-    console.log(photographer);
-   
-        const photographerModel = homePhotographerFactory(photographer);
-        const userCardDOM = photographerModel.getDetailedPageDOM();
-        photographerMain.appendChild(userCardDOM);
+	const photographerMain = document.querySelector(".main");
+    	let params = new URLSearchParams(document.location.search);
+    	let id = Number(params.get("id"));
+    	const photographer = photographers.find((el) => el.id === id);
 
+    	const photographerModel = homePhotographerFactory(photographer);
+    	const userCardDOM = photographerModel.getUserCardDOM();
+      // photographerMain.appendChild(userCardDOM);
 }
 
 async function init() {
