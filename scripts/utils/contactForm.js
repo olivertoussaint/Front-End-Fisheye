@@ -175,7 +175,7 @@ form.addEventListener('submit', (e) => {
         const form               = document.getElementById('form');
         const modalTitle = document.querySelector(".modal-title");
         form.style.display = "none";
-        modalTitle.innerHTML = `Votre message a bien été envoyé`;
+        modalTitle.innerHTML = `Votre message <br />a bien été envoyé`;
         function closeSubmit() {
             setTimeout(() => {
                 window.location.reload();

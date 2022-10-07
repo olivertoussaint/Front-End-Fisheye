@@ -3,11 +3,9 @@ function photographerFactory(data) {
 
     const picture = `assets/photographers_ID-photos/${portrait}`;
 
-
     function getUserCardDOM() {
         const cardPhotographer = document.createElement('section');
         const photographerCardHeader = document.createElement('header');
-        const photographerCardFooter = document.createElement('div');
         const cardLink = document.createElement('a');
         const cardImg = document.createElement('img');
         const cardTitle = document.createElement('h2');
@@ -33,11 +31,9 @@ function photographerFactory(data) {
         cardLocation.classList.add('card-location');
         cardTagline.classList.add('card-tagline');
         cardPrice.classList.add('card-price');
-        photographerCardFooter.classList.add('card-footer');
 
         cardPhotographer.appendChild(photographerCardHeader);
         cardPhotographer.appendChild(cardBody);
-        cardPhotographer.appendChild(photographerCardFooter);
         photographerCardHeader.appendChild(cardLink);
         cardLink.appendChild(cardImg);
         cardLink.appendChild(cardTitle);

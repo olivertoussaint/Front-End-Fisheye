@@ -5,7 +5,7 @@ function displayFilterMenu() {
       filterSelect.classList.toggle("open");
       console.log(filterSelect);
       if (!e.target.matches('.filter-select__trigger')) {
-        let dropdows = document.getElementsByClassName("filter-options-container");
+        let dropdows = document.querySelector(".filter-option");
         let i;
         for (i=0; i < dropdows.length; i++) {
           let openDropdown = dropdows[i];
