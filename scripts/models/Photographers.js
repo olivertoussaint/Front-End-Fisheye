@@ -1,5 +1,5 @@
 class Photographer {
-  constructor(data) {
+  constructor(photographers) {
     this._name = photographers.name
     this._id = photographers.id
     this._city = photographers.city
