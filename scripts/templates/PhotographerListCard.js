@@ -4,15 +4,16 @@ class PhotographerListCard {
     }
 
     createPhotographerCard() {
-        const $section = document.createElement('section')
-        $section.classList.add('photographer-card')
+        const $article = document.createElement('article')
+        $article.classList.add('photographer-card')
 
         const photographerCard = `
             <div class="photographer-card">
                 <a class="card-photographer-link" href="photographer.html?id=${this._photographer.id}" title="portfolio de ${this._photographer.name}" aria-label="portfolio de ${this._photographer.name}">
                     <img class="card-img"
+                    src="/assets/images/${this._photographer.portrait}"
                     alt="${this._photographer.name}"
-                    src="/assets/images/${this._photographer.portrait}"/>
+                    />
                     <h2>${this._photographer.name}</h2>
                 </a>
             </div>
@@ -26,8 +27,8 @@ class PhotographerListCard {
                 <span>${this._photographer.price}€/jour</span>
         `
         
-        $section.innerHTML = photographerCard
-        return $section
+        $article.innerHTML = photographerCard
+        return $article
     }
   }
   

@@ -16,12 +16,14 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
+  margin-bottom: 2.5rem;
 }
 
 #main,
 .main {
-  margin: 0 5rem;
+  margin: 0 15rem;
   height: auto;
 }
 
@@ -35,15 +37,11 @@ li {
   list-style: none;
 }
 
-/* .dialog {
-  display: none;
-} */
-
 .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 2rem 0;
+  margin: 2rem 0 0 0;
 }
 
 .banner {
@@ -63,42 +61,36 @@ li {
 }
 
 h1.banner-title {
-  margin: 0 6.25rem 0 0;
+  width: auto;
+  margin: 0 1.25rem 0 0;
   color: #d3573c;
-  font-size: 4rem;
+  font-size: 1.5rem;
 }
 
 .banner-location {
-  /* margin-bottom: 1rem; */
   color: #901c1c;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 300;
 }
 
 .banner-img img {
-  width: 12.5rem;
-  height: 14.6875rem;
+  width: 6.5rem;
+  height: 8.6875rem;
   border-radius: 50%;
   padding: 1.25rem 0 0.9375rem 0;
   object-fit: fill;
 }
-
-.banner-btn {
-  font-size: 1.25rem;
-  color: #fff;
-  width: auto;
-  padding: 0.9rem 0.5rem;
-  font-weight: 300;
-  border: none;
-  background-color: #901c1c;
-  border-radius: 0.3125rem;
-  cursor: pointer;
+.modal-btn {
+  display: none;
 }
 
 .modal-btn-mobile,
-.banner-btn {
+.modal-btn {
+  font-size: 1.25rem;
   background-color: #901c1c;
   color: #fff;
+  padding: 0.9rem 0.5rem;
+  font-weight: 300;
   border: none;
   transition: all 0.2s ease-in;
   border-radius: 0.4375rem;
@@ -109,11 +101,7 @@ h1.banner-title {
   width: 1.25rem;
 }
 
-.banner-btn:hover {
-  background-color: #d3573c;
-  color: rgb(17, 16, 16);
-}
-
+.modal-btn:hover,
 .modal-btn-mobile:hover {
   background-color: #d3573c;
   color: rgb(17, 16, 16);
@@ -215,6 +203,7 @@ h1.banner-title {
 /* -------------------------Lightbox---------------------------------------- */
 
 #lightbox {
+  /* display: block; */
   position: fixed;
   border: none;
   top: 0;
@@ -223,7 +212,7 @@ h1.banner-title {
   height: 100%;
   background-color: rgba(255, 255, 255, 0.924);
   z-index: 10;
-  animation: lightboxIn .5s;
+  animation: lightboxIn 0.5s;
 }
 
 .lightbox__close,
@@ -246,7 +235,6 @@ h1.banner-title {
   z-index: 11;
 }
 
-
 .lightbox__previous {
   right: auto;
   left: 0;
@@ -262,23 +250,23 @@ h1.banner-title {
 #lightbox button {
   opacity: 1;
   cursor: pointer;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 #lightbox button:hover {
-  opacity: .8;
-} 
+  opacity: 0.8;
+}
 
 .lightbox__container img {
   max-width: 100%;
   height: auto;
-  animation: lightboxIn .5s;
+  animation: lightboxIn 0.5s;
 }
 
 .lightbox__container video {
   max-width: 100%;
   height: auto;
-  animation: lightboxIn .5s;
+  animation: lightboxIn 0.5s;
 }
 
 .lightbox__container {
@@ -291,14 +279,18 @@ h1.banner-title {
 }
 
 @keyframes lightboxIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 /* -------------------------End of Lightbox-------------------------------- */
 
 .close-btn {
   position: relative;
-  bottom: 22px;
+  bottom: 35px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -323,7 +315,8 @@ h1.banner-title {
 }
 
 h1.modal-title {
-  font-size: 2.2rem;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
   color: #312e2e;
 }
 
@@ -351,7 +344,7 @@ form {
 
 form label {
   color: #312e2e;
-  font-size: 1.5625rem;
+  font-size: 1.2rem;
 }
 
 form div {
@@ -365,10 +358,12 @@ form div {
 form input {
   width: 100%;
   height: auto;
-  font-size: 1.5rem;
+  font-size: initial;
   border: none;
   outline: none;
-  border-radius: 5px;
+  border-radius: 0.2rem;
+  padding: 0.2rem 0 0 0;
+  line-height: 1.4;
 }
 
 form textarea {
@@ -423,7 +418,7 @@ form textarea {
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(107, 107, 107, 0.7);
+  background: rgb(231 226 226 / 65%);
   overflow: hidden;
   transition: opacity 0.4s 0.2s ease-out;
   z-index: 100;
@@ -447,13 +442,13 @@ form textarea {
   background-color: #db8876;
   border-radius: 0.6rem;
   color: black;
-  width: 100%;
-  height: 100%;
+  width: 350px;
+  height: 57vh;
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, calc(-50% - 100px));
-  padding: 2rem;
+  padding: 1.5rem;
   z-index: 150;
   transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
@@ -534,6 +529,7 @@ form textarea {
 }
 
 .total-likes-container {
+  opacity: 0;
   display: flex;
   justify-content: space-around;
   margin: auto;
@@ -564,25 +560,27 @@ form textarea {
 }
 
 h1.main-title {
+  font-size: 1.8rem;
   font-weight: 300;
   color: #901c1c;
-  margin-right: 13rem;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
 }
 
 .logo {
-  height: 50px;
-  margin-left: 190px;
+  height: 36px;
+  margin-left: 50%;
   cursor: pointer;
 }
 
-.photographer_section {
+.photographers_section {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
 }
 
 .photographer-card {
-  margin-top: 30px;
   justify-self: center;
   display: flex;
   justify-content: center;
@@ -594,7 +592,7 @@ h1.main-title {
   margin: 0;
   text-align: center;
   color: #d3573c;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 300;
 }
 
@@ -617,7 +615,7 @@ h1.main-title {
 }
 
 .card-photographer-link {
-  min-width: 400px;
+  min-width: 258px;
   text-align: center;
   text-decoration: none;
   filter: sepia(0);
@@ -659,56 +657,67 @@ h1.main-title {
   grid-template-columns: repeat(3, 1fr);
   justify-items: stretch;
   column-gap: 66px;
-  row-gap: 80px;
-  /* margin: 0 5rem; */
+  row-gap: 55px;
 }
 
 .media_card {
   color: #901c1c;
 }
 
-.card_media,
+.media_card_media,
 .img-card,
 .video-card {
-  width: 537px;
-  height: 350px;
+  width: 100%;
+  height: 25vh;
   border-radius: 0.2rem;
   object-fit: fill;
   cursor: pointer;
 }
 
+.media_card:hover {
+  transform: rotate3d(20, 10, 2, 23deg);
+  box-shadow: -0.5px 5px 5px #7c7b7ba5;
+  transition: 0.2s ease-out;
+}
+
 .play-icon {
+  opacity: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: 0.6s ease-in-out;
+}
+
+.video-card:hover > .play-icon {
+  opacity: 1;
+  transition: 0.2s ease-in-out;
 }
 
 .fa-play-circle {
   position: absolute;
-  margin-top: -350px;
+  margin-top: -255px;
   font-size: 3rem;
   background: transparent;
   color: #fbfbfb96;
 }
 
-.card-media-footer {
+.media_card_footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-top: 0.5rem; */
   padding: 1% 2%;
-  font-size: 1.5em;
+  font-size: 1em;
 }
 
-.card-media-title {
-  width: 300px;
+.media_card_title {
+  width: 215px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.card-media-likes {
+.media_card_likes {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -719,217 +728,53 @@ h1.main-title {
   background: transparent;
   margin-left: 10px;
   color: #901c1c;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  margin-top: 2.5px;
+  cursor: pointer;
 }
 
-@media screen and (min-width: 822px) {
+/* ---------------------- MEDIA QUERIES -------------------------- */
+
+@media screen and (max-width: 800px) {
+  #main,
+  .main {
+    margin: 0 0.5rem;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 678px) {
+  .modal-btn {
+    display: block;
+  }
   .modal-btn-mobile {
     display: none;
   }
-  .dialog-windows {
-    max-width: 380px;
-    height: auto;
-  }
-  form input {
-    height: 2.5rem;
-    font-size: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 1500px) {
-  .photographer_section {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (max-width: 822px) {
-  .banner-btn {
-    display: none;
-  }
-  .dialog-windows {
-    width: 360px;
-    height: auto;
-  }
   .total-likes-container {
-    display: none;
-  }
-  form input {
-    height: 1.5rem;
-    padding: 0 0 5px 0;
+    opacity: 1;
+    transition: 0.5s ease-in-out;
+    z-index: 300;
   }
 }
 
-@media screen and (max-width: 768px) {
-  #main,
-  .main {
-    margin: 0px 0.5rem;
-  }
-  h1.main-title {
-    margin-right: 0;
-  }
+@media screen and (max-width: 950px) {
   .media_card_container {
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 17px;
-    row-gap: 54px;
-  }
-
-  .card_media,
-  .img-card,
-  .video-card {
-    width: 100%;
-    height: 30vh;
-  }
-  .card-media-footer {
-    font-size: 1em;
-  }
-  .btn-heart {
-    font-size: 1em;
-    position: relative;
-    top: 2px;
-  }
-}
-
-@media screen and (max-width: 680px) {
-  .banner-title {
-    margin: 0;
-  }
-  .fa-play-circle {
-    margin-top: -259px;
-}
-}
-
-@media screen and (max-width: 600px) {
-  .media_card_container {
-    grid-template-columns: 1fr;
-  }
-
-  .card_media,
-  .img-card,
-  .video-card {
-    width: 100%;
-    height: 240px;
-  }
-  .logo {
-    height: 35px;
-    margin-left: 5px;
-  }
-  h1.main-title {
-    font-size: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 672px) {
-  #main {
-    position: relative;
-    top: -90px;
-  }
-  h1.main-title {
-    margin-right: 0;
-  }
-  .dialog-windows {
-    width: 80%;
-    height: 70%;
   }
 }
 
 @media screen and (max-width: 480px) {
-  #main,
-  .main {
-    margin: 0 0.1rem;
+  h1.main-title {
+    justify-content: center;
   }
-
-  h1.banner-title {
-    margin: 0 0.25rem 0 0;
-    font-size: 2rem;
+  .photographers_section {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
-
-  .banner-img img {
-    width: 140px;
-    height: 175px;
-  }
-  /* .media_card_container {
+  .media_card_container {
     grid-template-columns: 1fr;
   }
-
-  .card_media,
-  .img-card,
-  .video-card {
-    width: 100%;
-    height: 240px;
-  } */
-
-  #sortBy {
-    font-size: 1.5rem;
-  }
-
-  .filter-select__trigger {
-    height: 2.5rem;
-  }
-
-  .filter span {
-    font-size: 1rem;
-  }
-
-  .filter-options-container {
-    top: 25.75rem;
-    min-width: 9.5625rem;
-  }
-  .modal-btn-mobile {
-    width: 140px;
-    max-width: 200px;
-    font-size: 1rem;
-  }
-  .modal-close {
-    font-size: 2rem;
-  }
-
   .dialog-windows {
-    width: 90%;
-    height: auto;
-  }
-
-  form label {
-    font-size: 1.5rem;
-  }
-
-  form input {
-    height: 2.5rem;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  .logo {
-    height: 25px;
-    margin-left: 5px;
-  }
-  h1.main-title {
-    font-size: 1rem;
-  }
-  #modal-title {
-    font-size: 1.2rem;
-  }
-  form label {
-    font-size: 1.2rem;
-  }
-
-  form input {
-    height: 1.8125rem;
-    padding: 0 0 2px 0;
-  }
-
-  .btn-submit.button {
-    padding: 20px;
-  }
-  .filter-options-container {
-    top: 23.8rem;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .filter-options-container {
-    top: 22.3rem;
-  }
-  .filter-option {
-    font-size: 1rem;
+    width: 90vw;
   }
 }

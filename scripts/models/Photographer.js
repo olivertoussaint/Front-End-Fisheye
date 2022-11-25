@@ -34,7 +34,7 @@ class Photographer {
   }
 
   get portrait() {
-    return `/assets/images/${this.portrait}`
+    return `./assets/images/${this.portrait}`
   }
 
 }

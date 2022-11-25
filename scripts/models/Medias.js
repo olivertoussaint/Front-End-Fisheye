@@ -1,5 +1,5 @@
 class Media {
-  constructor(media, photographer) {
+  constructor(media) {
     this._id = media.id;
     this._photographerId = media.photographerId;
     this._title = media.title;
@@ -8,8 +8,6 @@ class Media {
     this._likes = media.likes;
     this._date = media.date;
     this._price = media.price;
-
-    this._photographer = photographer
   }
 
   get photographerId() {
@@ -39,4 +37,11 @@ class Media {
   get price() {
     return this._price;
   }
+
+  // get totalLikes() {
+  //   const total = arrMedia.reduce((acc, curr) => {
+  //     acc += curr._likes;
+  //     return acc;
+  //   }, 0);
+  // }
 }

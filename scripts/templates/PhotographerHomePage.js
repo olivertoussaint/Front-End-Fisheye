@@ -1,10 +1,9 @@
-class  PhotographerCard{
-  constructor(photographer,media) {
+class  PhotographerHomePage {
+  constructor(photographer) {
     this._photographer = photographer;
-    this._media = media;
   }
 
-  createPhotographer() {
+  createPhotographerHomePage() {
     const $section = document.createElement("section");
     $section.classList.add("banner");
     const photographerBanner = `
@@ -17,13 +16,10 @@ class  PhotographerCard{
         <p>${this._photographer.price}€/jour</p>
     </div>
     
-    <button class="banner-btn" type="button">Contactez-moi</button>
-    <button class="modal-btn-mobile" type="button">Contactez-moi</button>
-    
+    <button class="modal-btn" tabindex="0">Contactez-moi</button>  
+    <button class="modal-btn-mobile" tabindex="0">Contactez-moi</button>  
     <div class= banner-img>
-      <img
-      alt="${this._photographer.name}"
-      src="/assets/images/${this._photographer.portrait}"/>  
+      <img src="/assets/images/${this._photographer.portrait}" alt="${this._photographer.name}"/>  
     </div>   
       `;
 
