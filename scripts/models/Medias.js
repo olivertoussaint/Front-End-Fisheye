@@ -38,10 +38,4 @@ class Media {
     return this._price;
   }
 
-  // get totalLikes() {
-  //   const total = arrMedia.reduce((acc, curr) => {
-  //     acc += curr._likes;
-  //     return acc;
-  //   }, 0);
-  // }
 }

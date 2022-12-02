@@ -1,6 +1,8 @@
 class App {
   constructor() {
-    this.$photographersSection = document.querySelector(".photographers_section");
+    this.$photographersSection = document.querySelector(
+      ".photographers_section"
+    );
     this.photographersApi = new PhotographerApi("./data/photographers.json");
   }
 
@@ -19,7 +21,8 @@ app.init();
 class PhotographerPortfolio {
   constructor() {
     this.$main = document.querySelector(".main");
-    this.$lightboxContainer = document.createElement('div');
+    this.$filter = document.querySelector(".filter");
+    this.$lightboxContainer = document.createElement("div");
     this.$lightboxContainer.classList.add(".lightbox__container");
     this.$mediaContainer = document.createElement("div");
     this.$totalLikes = document.createElement("div");
@@ -34,97 +37,138 @@ class PhotographerPortfolio {
     let id = Number(params.get("id"));
     const photographers = await this.photographersApi.getPhotographers();
     const photographer = photographers.find((value) => value.id === id);
+
     const PhotographerProfil = new PhotographerHomePage(photographer);
-
-    const photographerName = photographer.name
-    console.log(photographerName)
-    const modalTitle = document.querySelector('.modal-title');
-     
-    modalTitle.innerHTML += photographerName
-
+    const photographerName = photographer.name;
+    const modalTitle = document.querySelector(".modal-title");
+    modalTitle.innerHTML += photographerName;
     const footerPage = new PhotographerHomePage(photographer);
     this.$main.appendChild(
       PhotographerProfil.createPhotographerHomePage(),
       footerPage.createLikes()
     );
+
     const medias = await this.mediasApi.getMedias();
     const arrMedia = medias.filter((value) => value.photographerId === id);
-  //   const severalTypeOfMedia = ({ id, date, price, ...lightboxMedia }) => { 
-  //   return lightboxMedia;
-  // };
-  arrMedia.forEach((media) => {  
+    const DropDown = new PhotographerHomePage(photographer);
+    this.$main.appendChild(DropDown.createSort());
+
+    arrMedia.forEach((media) => {
       const Gallery = new MediaCard(media);
       this.$mediaContainer.appendChild(Gallery.createMedia());
       this.$main.appendChild(this.$mediaContainer);
-     console.log(Gallery)
     });
-  
+
     const total = arrMedia.reduce((acc, curr) => {
       acc += curr.likes;
       return acc;
     }, 0);
 
     const $totalLikes = document.querySelector(".total-likes");
-    const $numberOfhearts = document.createElement("i");
-    $numberOfhearts.classList.add("fas", "fa-heart");
     $totalLikes.innerHTML += total;
-    $totalLikes.appendChild($numberOfhearts);
 
     // TODO
-    // const linksMedias = (array) => {
-    //   const $mediaCards = document.querySelectorAll('.media_card_media');
+    
+    const $lightboxLinks = document.querySelectorAll(".media_card_media");
+    $lightboxLinks.forEach((link) => {
+      const lightboxContainer = document.querySelector(".lightbox__container");
+      const lightbox = document.getElementById("lightbox");
+      const playerCard = document.querySelector(".video-card");
+      const playIcon = document.querySelector(".play-icon");
+      const lightboxClose = document.querySelector(".lightbox__close");
+      // const mediaCardLikes = document.querySelector(".media_card_likes");
+      // const mediaCardTitle = document.querySelector(".media_card_title");
+      const lightboxMediaLink = link;
+      
+      lightboxMediaLink.firstElementChild.addEventListener("click", () => {
+        lightbox.classList.add("show");
+        lightboxMediaLink.classList.remove('media_card_media')
+        lightboxMediaLink.classList.add('slide')
+        lightboxContainer.classList.add("no-effect");
+        playerCard.setAttribute("controls", "controls");
+        playIcon.style.display = "none";
+        // mediaCardLikes.style.display = "none";
+        lightboxContainer.appendChild(lightboxMediaLink);
+      });
 
-    //   $mediaCards.forEach((card, index) => {
-    //     card.addEventListener('click', () => { 
-    //       displayLightbox(array, index);
-    //     });
-    //     card.addEventListener('keypress', (e) => {
-    //       if (e.key === 'Enter') {
-    //         displayLightbox(array, index)
-    //       }
-    //     })
-    //   });
+      lightboxMediaLink.firstElementChild.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          lightbox.classList.add("show");
+          lightboxContainer.classList.add("no-effect");
+          playerCard.setAttribute("controls", "controls");
+          playIcon.style.display = "none";
+          lightboxContainer.appendChild(lightboxMediaLink);
+        }
+      });
 
-    //   function displayLightbox(array, index) {
-    //     const lightbox = new Lightbox(array, index);
-    //   }
+    });
 
-    // }
+    
 
     const clickManagerOfHearts = () => {
-      const $hearts = document.querySelectorAll('.btn-heart');
-  
+      const $hearts = document.querySelectorAll(".btn-heart");
+
       $hearts.forEach((heart) => {
-          heart.addEventListener('click', () => {
+        heart.addEventListener("click", () => {
+          toggleNumberOfLikes(heart);
+        });
+        heart.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
             toggleNumberOfLikes(heart);
-          });
-          heart.addEventListener('keypress', (e) => {
-              if (e.key === 'Enter') {
-                toggleNumberOfLikes(heart);
-              }
-          });
-      });
-  
-      function toggleNumberOfLikes(heart) {
-          heart.parentElement.classList.toggle('liked');
-          const $numberOfLikes = heart.parentElement.firstChild;
-          const $totalNumberOfLikes = document.querySelector('.total-likes');
-          let numberOfLikes = parseInt($numberOfLikes.textContent);
-          let totalNumberOfLikes = parseInt($totalNumberOfLikes.textContent);
-          if (heart.parentElement.classList.contains('liked')) {
-              numberOfLikes++;
-              totalNumberOfLikes++;
-          } else {
-              numberOfLikes--;
-              totalNumberOfLikes--;
           }
-          $numberOfLikes.textContent = numberOfLikes;
-          $totalNumberOfLikes.textContent = totalNumberOfLikes;
+        });
+      });
+
+      function toggleNumberOfLikes(heart) {
+        heart.parentElement.classList.toggle("liked");
+        const $numberOfLikes = heart.previousElementSibling;
+        const $totalNumberOfLikes = document.querySelector(".total-likes");
+        let numberOfLikes = parseInt($numberOfLikes.textContent);
+        let totalNumberOfLikes = parseInt($totalNumberOfLikes.textContent);
+        if (heart.parentElement.classList.contains("liked")) {
+          numberOfLikes++;
+          totalNumberOfLikes++;
+        } else {
+          numberOfLikes--;
+          totalNumberOfLikes--;
+        }
+        $numberOfLikes.textContent = numberOfLikes;
+        $totalNumberOfLikes.textContent = totalNumberOfLikes;
       }
-  }
-  clickManagerOfHearts();
+    };
+    clickManagerOfHearts();
+
+    //-----------------------------------------------------------
+
+    const clickDropdown = () => {
+      const $dropDownMenu = document.querySelector(".dropdown-Menu");
+      const filterSelect = document.querySelector(".filter-select");
+      const $filterOptions = Array.from(document.querySelectorAll(".filter-option"));
+      const array = Array.from(arrMedia)
+      console.log(...array);
+      console.log($filterOptions);
+
+      $filterOptions.forEach((e) => {
+        e.addEventListener('click', () => {
+            console.log('on a pratiquement fini !!!')
+
+        })
+      })
 
 
+      $dropDownMenu.addEventListener("click", (e) => {
+        e.preventDefault();
+        filterSelect.classList.toggle('open')
+      })
+    };
+
+    clickDropdown();
+
+
+
+   //------------------------------------------------------------
+    
+   
   }
 }
 

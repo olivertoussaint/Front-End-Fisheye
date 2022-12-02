@@ -98,9 +98,7 @@
       <button role="button" class="lightbox__previous" tabindex="0" title="précédent">
         <i class="fas fa-chevron-left"></i>
       </button>
-      <div class="lightbox__container">
-        <h2 class="lightbox__container__title">Ici le titre du média</h2>
-      </div>
+      <div class="lightbox__container"></div>
     </dialog>
 
 
@@ -113,11 +111,32 @@
     </header>
     <main class="main"></main>
 
+    <!--  Dropdown Menu -->
+    <section class="filter">
+      <h3 id="trierPar">Trier par </h3>
+      <div class="dropdown-Menu">
+          <div class="filter-select">
+              <a href="#" role="button" class="filter-select__trigger" aria-controls="filter-options"
+                  aria-haspopup="listbox" aria-label="Trier par">
+                  <span>Popularité</span>
+                  <div class="arrow"></div>
+              </a>
+              <div class="filter-options-container" role="listbox" id="filter-options">
+                  <a href="#" class="filter-option selected" data-value="popularite" aria-selected="true"
+                      aria-label="Trier par popularité" role="option">Popularité</a>
+                  <a href="#" class="filter-option" data-value="date" aria-selected="false"
+                      aria-label="Trier par date" role="option">Date</a>
+                  <a href="#" class="filter-option" data-value="titre" aria-selected="false"
+                      aria-label="Trier par titre" role="option">Titre</a>
+              </div>
+          </div>
+      </div>
+  </section>
+    
+
 <!-- Models -->
 <script src="/scripts/models/Medias.js"></script>
 <script src="/scripts/models/Photographer.js"></script>
-<script src="/scripts/models/lightbox.js"></script>
-
 
 <!-- Factories -->
 <script src="/scripts/factories/MediaFactory.js"></script>

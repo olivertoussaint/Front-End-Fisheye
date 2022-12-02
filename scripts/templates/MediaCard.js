@@ -2,8 +2,18 @@ class MediaCard {
   constructor(media) {
     this._media = media;
   }
+
+  get image() {
+    return `/assets/images/${this._photographerId}/${this._image}`;
+  }
+
+  get video() {
+    return `/assets/images/${this._photographerId}/${this._video}`;
+  }
+
+
   createMedia() {
-    const media = this._media.image;
+    const picture = this._media.image;
     const video = this._media.video;
     const $article = document.createElement("article");
     const $mediaContainer = document.createElement("div");
@@ -14,14 +24,14 @@ class MediaCard {
     const pictureInGallery = `
         <div class="media_card_media">
             <a href="#" role="button"  title ="${this._media.title}">
-                <img class="img-card" src="../../assets/images/${this._media.photographerId}/${media}" alt="${this._media.title}" data-media-id=${this._media.id}/>
+                <img class="img-card" src="../../assets/images/${this._media.photographerId}/${picture}" alt="${this._media.title}" data-media-id=${this._media.id}/>
             </a>
             <div class="media_card_footer">
                 <p class="media_card_title">${this._media.title}</p>
                 <div class="media_card_likes">
                     <p class="counter" aria-label="nombre de likes ${this._media.likes}">${this._media.likes}</p>
                     <button class="btn-heart" role="button" aria-label="cliquez sur le coeur tabindex="0">
-                        <i class="heart far fa-heart"></i>
+                        <i class="fas fa-heart"></i>
                     </button>
                 </div>
             </div>
@@ -41,14 +51,14 @@ class MediaCard {
                 <div class="media_card_likes">
                     <p class="counter" aria-label="nombre de likes ${this._media.likes}">${this._media.likes}</p>
                     <button role="button" class="btn-heart"  aria-label="cliquez sur le coeur tabindex="0">
-                        <i class="heart far fa-heart"></i>
+                        <i class="heart fas fa-heart"></i>
                     </button>
               </div>
             </div>
           </div>
           `;
 
-    if (!media) {
+    if (!picture) {
       $article.innerHTML = videoInGallery;
     } else {
       $article.innerHTML = pictureInGallery;
@@ -57,8 +67,8 @@ class MediaCard {
   }
 
   createLightboxMediaCard() {
-    const media = this._media.image;
-    const video = this._media.video;
+    // const media = this._media.image;
+    // const video = this._media.video;
     const dialog = document.getElementById("#lightbox");
     const $mediaWrapper = document.querySelector(".lightbox__container");
 
@@ -72,7 +82,7 @@ class MediaCard {
       <div class="play-icon"><i class="far fa-play-circle"></i></div>
     `;
 
-    if (media) {
+    if (this.image) {
       $mediaWrapper.innerHTML = lightboxImage;
     } else {
       $mediaWrapper.innerHTML = lightboxVideo;
