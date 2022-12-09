@@ -1,176 +1,320 @@
 class App {
   constructor() {
-    this.$photographersSection = document.querySelector(
-      ".photographers_section"
-    );
-    this.photographersApi = new PhotographerApi("./data/photographers.json");
+      this.$photographersWrapper = document.querySelector('.photographers_section');
+      this.$photographerBannerWrapper = document.querySelector('.banner');
+      this._photographerApi = new PhotographerApi('data/photographers.json');
+      this._mediaApi = new MediaApi('data/photographers.json');
   }
 
-  async init() {
-    const photographers = await this.photographersApi.getPhotographers();
-    photographers.forEach((photographer) => {
-      const Template = new PhotographerListCard(photographer);
-      this.$photographersSection.appendChild(Template.createPhotographerCard());
-    });
-  }
-}
-const app = new App();
-app.init();
-// ----------------------------------------------------------------------
+  async displayHomePage() {
+      const photographersData = await this._photographerApi.getPhotographersData();
 
-class PhotographerPortfolio {
-  constructor() {
-    this.$main = document.querySelector(".main");
-    this.$filter = document.querySelector(".filter");
-    this.$lightboxContainer = document.createElement("div");
-    this.$lightboxContainer.classList.add(".lightbox__container");
-    this.$mediaContainer = document.createElement("div");
-    this.$totalLikes = document.createElement("div");
-    this.$totalLikes.classList.add("total-likes-container");
-    this.$mediaContainer.classList.add("media_card_container");
-    this.photographersApi = new PhotographerApi("./data/photographers.json");
-    this.mediasApi = new MediaApi("./data/photographers.json");
+      photographersData
+          .map(photographer => new Photographer(photographer))
+          .forEach(photographer => {
+              const Template = new PhotographerCard(photographer);
+              this.$photographersWrapper.appendChild(
+                  Template.createPhotographerCard()
+              );
+          })
   }
 
-  async idInit() {
-    let params = new URLSearchParams(document.location.search);
-    let id = Number(params.get("id"));
-    const photographers = await this.photographersApi.getPhotographers();
-    const photographer = photographers.find((value) => value.id === id);
+  async displayPhotographerPage() {
+      const params = (new URL(document.location)).searchParams;
+      const photographerId = parseInt(params.get('photographer'));
 
-    const PhotographerProfil = new PhotographerHomePage(photographer);
-    const photographerName = photographer.name;
-    const modalTitle = document.querySelector(".modal-title");
-    modalTitle.innerHTML += photographerName;
-    const footerPage = new PhotographerHomePage(photographer);
-    this.$main.appendChild(
-      PhotographerProfil.createPhotographerHomePage(),
-      footerPage.createLikes()
-    );
+      if (!isNaN(photographerId)) {
 
-    const medias = await this.mediasApi.getMedias();
-    const arrMedia = medias.filter((value) => value.photographerId === id);
-    const DropDown = new PhotographerHomePage(photographer);
-    this.$main.appendChild(DropDown.createSort());
+          const photographer = await this._photographerApi.getPhotographerDataByPhotographerId(photographerId);
+          const photographerPageTemplate = new PhotographerHomePage(photographer);
+          this.$photographerBannerWrapper.innerHTML = photographerPageTemplate.createPhotographerHomePage();
+          
+          const mediasData = await this._mediaApi.getMediasDataByPhotographerId(photographerId);
+          const mediasSortedByPopularity = mediasData.sort((a, b) => b.likes - a.likes);
+          const currentMedias = displayMedias(mediasSortedByPopularity);
+          createLinksOnMediasCards(currentMedias);
 
-    arrMedia.forEach((media) => {
-      const Gallery = new MediaCard(media);
-      this.$mediaContainer.appendChild(Gallery.createMedia());
-      this.$main.appendChild(this.$mediaContainer);
-    });
+          const $asideWrapper = document.querySelector('.total-likes-container');
+          const asideTemplate = new Aside(photographer, mediasData);
+          $asideWrapper.innerHTML = asideTemplate.createAside();
 
-    const total = arrMedia.reduce((acc, curr) => {
-      acc += curr.likes;
-      return acc;
-    }, 0);
+          manageClickOnHeartsBehaviour();
 
-    const $totalLikes = document.querySelector(".total-likes");
-    $totalLikes.innerHTML += total;
+          manageLightboxControls(currentMedias);
+          
+          manageSortingFunctionality(currentMedias);
 
-    // TODO
-    
-    const $lightboxLinks = document.querySelectorAll(".media_card_media");
-    $lightboxLinks.forEach((link) => {
-      const lightboxContainer = document.querySelector(".lightbox__container");
-      const lightbox = document.getElementById("lightbox");
-      const playerCard = document.querySelector(".video-card");
-      const playIcon = document.querySelector(".play-icon");
-      const lightboxClose = document.querySelector(".lightbox__close");
-      // const mediaCardLikes = document.querySelector(".media_card_likes");
-      // const mediaCardTitle = document.querySelector(".media_card_title");
-      const lightboxMediaLink = link;
+          // const $contactButton = document.querySelector('.contact_button');
+          // $contactButton.addEventListener('click', () => displayModal(photographer));
+          // $contactButton.addEventListener('keypress', (e) => {
+          //     if (e.key === 'Enter') {
+          //         displayModal(photographer);
+          //     }
+          // });
+          
+          // manageModalControls();
+
+      } 
+  }
+
+  displayErrorPage() {
       
-      lightboxMediaLink.firstElementChild.addEventListener("click", () => {
-        lightbox.classList.add("show");
-        lightboxMediaLink.classList.remove('media_card_media')
-        lightboxMediaLink.classList.add('slide')
-        lightboxContainer.classList.add("no-effect");
-        playerCard.setAttribute("controls", "controls");
-        playIcon.style.display = "none";
-        // mediaCardLikes.style.display = "none";
-        lightboxContainer.appendChild(lightboxMediaLink);
-      });
+  }
 
-      lightboxMediaLink.firstElementChild.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-          lightbox.classList.add("show");
-          lightboxContainer.classList.add("no-effect");
-          playerCard.setAttribute("controls", "controls");
-          playIcon.style.display = "none";
-          lightboxContainer.appendChild(lightboxMediaLink);
-        }
-      });
+}
 
-    });
 
-    
 
-    const clickManagerOfHearts = () => {
-      const $hearts = document.querySelectorAll(".btn-heart");
 
-      $hearts.forEach((heart) => {
-        heart.addEventListener("click", () => {
-          toggleNumberOfLikes(heart);
-        });
-        heart.addEventListener("keypress", (e) => {
-          if (e.key === "Enter") {
-            toggleNumberOfLikes(heart);
+const displayMedias = (array) => {
+  const $mediasWrapper = document.querySelector('.media_card_container');
+  $mediasWrapper.innerHTML = '';
+  const currentMedias = array
+      .map((media) => {
+          if (typeof media.image !== 'undefined') {
+              return new Image(media);
+          } else if (typeof media.video !== 'undefined') {
+              return new Video(media);
           }
-        });
-      });
+          return null;
+      })
+      .filter(element => (element instanceof Image) || (element instanceof Video));
 
-      function toggleNumberOfLikes(heart) {
-        heart.parentElement.classList.toggle("liked");
-        const $numberOfLikes = heart.previousElementSibling;
-        const $totalNumberOfLikes = document.querySelector(".total-likes");
-        let numberOfLikes = parseInt($numberOfLikes.textContent);
-        let totalNumberOfLikes = parseInt($totalNumberOfLikes.textContent);
-        if (heart.parentElement.classList.contains("liked")) {
+  currentMedias.forEach(media => {
+      if (media instanceof Image) {
+          const mediaTemplate = new ImageCard(media);
+          $mediasWrapper.appendChild(
+              mediaTemplate.createImageCard()
+          );
+      } else if (media instanceof Video) {
+          const mediaTemplate = new VideoCard(media);
+          $mediasWrapper.appendChild(
+              mediaTemplate.createVideoCard()
+          );
+      }
+  });
+
+  return currentMedias;
+}
+
+const manageClickOnHeartsBehaviour = () => {
+  const $hearts = document.querySelectorAll('.heart');
+
+  $hearts.forEach((heart) => {
+      heart.addEventListener('click', () => {
+          addOrReduceNumberOfLikes(heart);
+      });
+      heart.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+              addOrReduceNumberOfLikes(heart);
+          }
+      });
+  });
+
+  function addOrReduceNumberOfLikes(heart) {
+      heart.parentElement.classList.toggle('liked');
+      const $numberOfLikes = heart.parentElement.firstChild;
+      const $totalNumberOfLikes = document.getElementById('total_number_of_likes');
+      let numberOfLikes = parseInt($numberOfLikes.textContent);
+      let totalNumberOfLikes = parseInt($totalNumberOfLikes.textContent);
+      if (heart.parentElement.classList.contains('liked')) {
           numberOfLikes++;
           totalNumberOfLikes++;
-        } else {
+      } else {
           numberOfLikes--;
           totalNumberOfLikes--;
-        }
-        $numberOfLikes.textContent = numberOfLikes;
-        $totalNumberOfLikes.textContent = totalNumberOfLikes;
       }
-    };
-    clickManagerOfHearts();
-
-    //-----------------------------------------------------------
-
-    const clickDropdown = () => {
-      const $dropDownMenu = document.querySelector(".dropdown-Menu");
-      const filterSelect = document.querySelector(".filter-select");
-      const $filterOptions = Array.from(document.querySelectorAll(".filter-option"));
-      const array = Array.from(arrMedia)
-      console.log(...array);
-      console.log($filterOptions);
-
-      $filterOptions.forEach((e) => {
-        e.addEventListener('click', () => {
-            console.log('on a pratiquement fini !!!')
-
-        })
-      })
-
-
-      $dropDownMenu.addEventListener("click", (e) => {
-        e.preventDefault();
-        filterSelect.classList.toggle('open')
-      })
-    };
-
-    clickDropdown();
-
-
-
-   //------------------------------------------------------------
-    
-   
+      $numberOfLikes.textContent = numberOfLikes;
+      $totalNumberOfLikes.textContent = totalNumberOfLikes;
   }
 }
 
-const photographerHomePage = new PhotographerPortfolio();
-photographerHomePage.idInit();
+const manageSortingFunctionality = (array) => {
+  const $listbox = document.querySelector('.listbox');
+  const $angleUp = document.querySelector('.fa-angle-up');
+  const $angleDown = document.querySelector('.fa-angle-down');
+  const $sortingOptions = Array.from(document.querySelectorAll('.sorting_option'));
+  const $optionsShown = document.querySelectorAll('.dropdown_menu > button');
+  let fullyExpandedMenu = false;
+
+  $listbox.addEventListener('click', () => {
+      openOrCloseListbox();
+  });
+  $listbox.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+          openOrCloseListbox();
+      }
+  });
+
+  $sortingOptions.forEach((element) => {
+      element.addEventListener('click', () => {
+          manageListbox(element, array);
+      });
+      element.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+              manageListbox(element, array);
+          }
+      });
+  }
+
+  );
+
+  function openOrCloseListbox() {
+      if (fullyExpandedMenu === false) {
+          $sortingOptions.forEach((option) => {
+              option.style.display = 'block';
+          });
+          fullyExpandedMenu = true;
+          $angleUp.style.display = 'block';
+          $listbox.setAttribute('aria-expanded', 'true');
+          $optionsShown[0].focus();
+      } else {
+          $sortingOptions.forEach((option) => {
+              option.style.display = 'none';
+          });
+          fullyExpandedMenu = false;
+      }
+      if ($angleDown !== null) {
+          $angleDown.style.display = 'none';
+      }       
+  }
+
+  function manageListbox(element, array) {
+      $angleDown.style.display = 'block';
+
+      switch (element.value) {
+          case 'popularity':
+              array.sort((a, b) => b._likes - a._likes);
+              break;
+          case 'date':
+              array.sort((a, b) => new Date(b._date) - new Date(a._date));
+              break;
+          case 'title':
+              array.sort((a, b) => a._title.localeCompare(b._title));
+              break;
+      }
+
+      displayMedias(array);
+      manageClickOnHeartsBehaviour();
+      createLinksOnMediasCards(array);
+
+      let $hiddenButton = document.querySelector('.dropdown_menu .hidden button');
+      const $activeOption = document.querySelector('.active_option');
+      const clickedOptionPosition = $sortingOptions.indexOf(element);
+      const clickedOptionValue = $sortingOptions[clickedOptionPosition].innerText;
+
+      $activeOption.innerText = clickedOptionValue;
+      $listbox.setAttribute('aria-label', `tri des médias par ${clickedOptionValue.toLowerCase()}`);
+      $listbox.setAttribute('aria-expanded', 'false');
+      document.querySelector('.dropdown_menu .hidden').appendChild(element);
+      document.querySelector('.dropdown_menu').appendChild($hiddenButton);
+      
+      $hiddenButton = document.querySelector('.dropdown_menu .hidden button');
+      const $optionsShown = document.querySelectorAll('.dropdown_menu > button');
+      
+      fullyExpandedMenu = false;
+      $angleUp.style.display = 'none';
+      $hiddenButton.setAttribute('aria-selected', 'true');
+      $optionsShown.forEach((option) => {
+          option.style.display = 'none';
+          option.setAttribute('aria-selected', 'false');
+      });
+      $listbox.focus();
+  }               
+}
+
+const createLinksOnMediasCards = (array) => {
+  const $mediasCards = document.querySelectorAll('.media_card__media');
+  
+  $mediasCards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+          displayLightbox(array, index);
+      });
+      card.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+              displayLightbox(array, index);
+          }
+      });
+  });
+
+  function displayLightbox(array, index) {
+      const lightbox = new Lightbox(array, index);
+      lightbox.close();
+      lightbox.display();
+  }
+}
+
+
+const manageLightboxControls = (array) => {
+
+  const $lightboxCloseButton = document.querySelector('.lightbox__close');
+  const $lightboxNextButton = document.querySelector('.lightbox__next');
+  const $lightboxPreviousButton = document.querySelector('.lightbox__previous');
+
+  $lightboxCloseButton.addEventListener('click', () => closeLightbox(array));
+  $lightboxCloseButton.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+          closeLightbox(array);
+      }
+  });
+
+  $lightboxNextButton.addEventListener('click', () => goToNextMedia(array));
+  $lightboxNextButton.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+          goToNextMedia(array);
+      }
+  });
+
+  $lightboxPreviousButton.addEventListener('click', () => goToPreviousMedia(array));
+  $lightboxPreviousButton.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+          goToPreviousMedia(array);
+      }
+  });
+
+  function closeLightbox(array) {
+      const $mediaWrapper = document.querySelector('.lightbox__container');
+      let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+      let index = array.findIndex((media) => media._id === mediaId);
+      const lightbox = new Lightbox(array, index);
+      lightbox.close();
+  }
+
+  function goToNextMedia(array) {
+      const $mediaWrapper = document.querySelector('.lightbox__container');
+      let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+      let index = array.findIndex((media) => media._id === mediaId);
+      const lightbox = new Lightbox(array, index);
+      lightbox.next();
+  }
+  
+  function goToPreviousMedia(array) {
+      const $mediaWrapper = document.querySelector('.lightbox__container');
+      let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
+      let index = array.findIndex((media) => media._id === mediaId);
+      const lightbox = new Lightbox(array, index);
+      lightbox.previous();
+  }
+
+}
+
+
+
+
+
+const currentPage = document.location.pathname;
+const app = new App();
+switch (currentPage) {
+  case '/':
+  case '/fisheye/':
+  case '/index.html':
+  case '/fisheye/index.html':
+      app.displayHomePage();
+      break;
+  case '/photographer.html':
+  case '/fisheye/photographer.html':
+      app.displayPhotographerPage();
+      break;
+  default:
+      app.displayErrorPage();
+}

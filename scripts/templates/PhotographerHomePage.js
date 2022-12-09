@@ -4,9 +4,7 @@ class  PhotographerHomePage {
   }
 
   createPhotographerHomePage() {
-    const $section = document.createElement("section");
-    $section.classList.add("banner");
-    const photographerBanner = `
+    const photographerHomePage = `
     <div class="photographer-banner-info">
       <h1 class="banner-title">${this._photographer.name}</h1>
         <p class="banner-location">
@@ -16,60 +14,42 @@ class  PhotographerHomePage {
         <p>${this._photographer.price}€/jour</p>
     </div>
     
-    <button class="modal-btn" tabindex="0">Contactez-moi</button>  
-    <button class="modal-btn-mobile" tabindex="0">Contactez-moi</button>  
+    <button class="modal-btn" tabindex="0" aria-label="ouvre le formulaire pour contacter ${this._photographer.name}">Contactez-moi</button>  
+    <button class="modal-btn-mobile" tabindex="0" aria-label="ouvre le formulaire pour contacter ${this._photographer.name}">Contactez-moi</button>  
     <div class= banner-img>
       <img src="/assets/images/${this._photographer.portrait}" alt="${this._photographer.name}"/>  
-    </div>   
-      `;
-
-      $section.innerHTML = photographerBanner;
-
-      return $section;
-    };
-
-    createSort() {
-      const $filter = document.querySelector(".filter");
-      const $dropDown = `
-      <h3 id="sortBy">Trier par</h3>
-      <div class="dropdown-Menu">
-          <div class="filter-select">
-              <a href="#" role="button" class="filter-select__trigger" aria-controls="filter-options"
-                  aria-haspopup="listbox" aria-label="Trier par">
-                  <span>Popularité</span>
-                  <div class="arrow"></div>
-              </a>
-              <div class="filter-options-container" role="listbox" id="filter-options">
-                  <a href="#" class="filter-option selected" value="popularite" aria-selected="true"
-                      aria-label="Trier par popularité" role="option">Popularité</a>
-                  <a href="#" class="filter-option" value="date" aria-selected="false"
-                      aria-label="Trier par date" role="option">Date</a>
-                  <a href="#" class="filter-option" value="titre" aria-selected="false"
-                      aria-label="Trier par titre" role="option">Titre</a>
-              </div>
-          </div>
-      </div>
-      `
-      $filter.innerHTML = $dropDown;
-
-      return $filter;
-    }
-
-    createLikes() {
-      const $main = document.querySelector(".main");
-      const totalLikes = `
-      <div class="total-likes-container">
-        <div class="total-likes"></div>
-        <div class="heart-counter"><i class="fas fa-heart"></i></div>
-        <div class="price-container">
-        <p class="price">${this._photographer.price}€/jour</p>
+    </div>  
+ 
+    
+    <div class="photographer_portfolio__sorted_by">
+        <p class="legend">Trier par</p>
+        <div class="dropdown_menu">
+            <div class="listbox" role="button" tabindex="0" aria-label="trier les médias par ..."
+                aria-haspopup="true" aria-expanded="false" aria-selected="true">
+                <p class="active_option">Popularité</p>
+                <i class="fas fa-angle-down"></i>
+                <i class="fas fa-angle-up"></i>
+            </div>
+            <div class="hidden">
+                <button class="sorting_option" value="popularity" role="listbox" tabindex="0" aria-label="tri des médias par popularité"
+                    aria-selected="true">Popularité</button>
+            </div>
+            <button class="sorting_option" value="date" role="listbox" tabindex="0" aria-label="tri des médias par date"
+                aria-selected="false">Date</button>
+            <button class="sorting_option" value="title" role="listbox" tabindex="0" aria-label="tri des médias par titre"
+                aria-selected="false">Titre</button>
         </div>
+    </div>
+  
+      <div class="total-likes-container">
+      <div class="total-likes"></div>
+      <div class="heart-counter"><i class="fas fa-heart"></i></div>
+        <div class="price-container">
+          <p class="price">${this._photographer.price}€/jour</p>
+      </div> 
       </div>   
         `;
-  
-        $main.innerHTML = totalLikes;
-  
-        return $main;
+        return photographerHomePage;
       }
 
     }
