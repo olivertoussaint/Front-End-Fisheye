@@ -2,7 +2,7 @@ window.onload = function () {
   const buttonModal = document.querySelector(".modal-btn");
   const buttonModalMobile = document.querySelector(".modal-btn-mobile");
   const dialog = document.querySelector(".dialog");
-  const main = document.querySelector(".main");
+  const main = document.querySelector("#main");
   const closeButton = document.querySelector(".close-btn");
 
   buttonModal.addEventListener("click", displayModal);

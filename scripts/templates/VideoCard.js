@@ -13,9 +13,9 @@ class VideoCard extends MediaCard {
                 </video>
                 <div class="play-icon"><i class="far fa-play-circle"></i></div>
             </div>
-            <div class="media_card_footer">
-                <h2 class="media_card_title" class="media_card__description__title">${this._media.title}</h2>
-                <p class="media_card__description__popularity"><span class="number_of_likes">${this._media.likes}</span> <span class="heart"><i class="fas fa-heart" tabindex="0" aria-label="Cliquez pour liker le média"></i></span></p>
+            <div class="media_card__footer">
+                <h2 class="media_card__title" class="media_card__description__title">${this._media.title}</h2>
+                <p class="media_card__NumberOfLikes"><span class="number_of_likes">${this._media.likes}</span> <span class="heart"><i class="fas fa-heart" tabindex="0" aria-label="Cliquez pour liker le média"></i></span></p>
             </div>
         `;
         $mediaCard.innerHTML = mediaCard;
@@ -23,7 +23,7 @@ class VideoCard extends MediaCard {
     }
 
     createLightboxVideoCard() {
-        const $mediaWrapper = document.querySelector('.lightbox__container');
+        const $mediaWrapper = document.querySelector('.lightbox__container__media');
         
         const $source = document.createElement('source');
         $source.setAttribute('src', `assets/images/${this._media.photographerId}/${this._media.video}`);

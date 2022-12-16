@@ -76,7 +76,7 @@
               <small id="textarea-error"></small>
             </div>
             <input 
-              class="btn-submit button" 
+              class="btn-submit" 
               type="submit" 
               value="Envoyer" 
               role="Button"
@@ -89,18 +89,21 @@
 
     <!-- Lightbox modal -->
     <dialog id="lightbox" aria-hidden="true" aria-label="image rapprochée">
-      <button role="button" class="lightbox__close" tabindex="0" title="fermer la modale">
-        <i class="fas fa-times"></i>
-      </button>
-      <button role="button" class="lightbox__next" tabindex="0" title="suivant">
-        <i class="fas fa-chevron-right"></i>
-      </button>
-      <button role="button" class="lightbox__previous" tabindex="0" title="précédent">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <div class="lightbox__container">
-        <div class="lightbox__container__title"></div>
+      <div role="button" class="lightbox__close" tabindex="0" title="fermer la modale">
+        <p class="sr-only">Fermer</p>
+        <span class="fas fa-times" aria-hidden="true"></span>
       </div>
+      <div role="button" class="lightbox__next" tabindex="0" title="suivant">
+        <p class="sr-only">Suivant</p>
+        <span class="fas fa-angle-right" aria-hidden="true"></span>
+      </div>
+      <div role="button" class="lightbox__previous" tabindex="0" title="précédent">
+        <p class="sr-only">Précédent</p>
+        <span class="fas fa-angle-left" aria-hidden="true"></span>
+      </div>
+      <div class="lightbox__container__media">
+      </div>
+      <p class="lightbox__container__title"></p>
     </dialog>
 
 
@@ -111,19 +114,11 @@
         </a>
       </div>
     </header>
-    <main class="main" id="main">
-      <section class="banner"></section>
-    <!--  Dropdown Menu -->
-    <div class="filter-dropdown-wrapper">
+    <main id="main" aria-hidden="false">
+      <div class="photographer_data"></div>
 
-      
-        
-
-
-
-    </div>
-  <div class="media_card_container"></div>
-   </main> 
+</main> 
+<div class="media_card__container"></div>
 
 <!-- Models -->
 <script src="/scripts/models/Medias.js"></script>

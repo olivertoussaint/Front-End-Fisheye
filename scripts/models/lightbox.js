@@ -46,7 +46,7 @@ class Lightbox {
     }
 
     next() {
-        const $mediaWrapper = document.querySelector('.lightbox__container');
+        const $mediaWrapper = document.querySelector('.lightbox__container__media');
         const $titleWrapper = document.querySelector('.lightbox__container__title');
         let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
         let index = this._array.findIndex((media) => media._id === mediaId);
