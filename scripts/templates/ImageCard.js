@@ -8,7 +8,7 @@ class ImageCard extends MediaCard {
         $mediaCard.classList.add('media_card');
         const mediaCard = `
             <div class="media_card__media" tabindex="0" aria-labelledby="media_card__description__title">
-                <img  class="img-card" src="assets/images/${this._media.photographerId}/${this._media.image}" alt="${this._media.title}" title="${this._media.title}" data-media-id=${this._media.id}>
+                <img  class="img-card" src="assets/images/${this._media.photographerId}/${this._media.image}" alt="${this._media.title}" title="${this._media.title}" data-id=${this._media.id}>
             </div>
             <div class="media_card__footer">
                 <h2 class="media_card__title">${this._media.title}</h2>
@@ -20,12 +20,12 @@ class ImageCard extends MediaCard {
     }
 
     createLightboxImageCard() {
-        const $mediaWrapper = document.querySelector('.lightbox__container__media');
+        const $mediaWrapper = document.querySelector('.lightbox__container');
 
         const $img = document.createElement('img');
         $img.setAttribute('src', `assets/images/${this._media.photographerId}/${this._media.image}`);
         $img.setAttribute('alt', this._media.title);
-        $img.setAttribute('data-media-id', this._media.id);
+        $img.setAttribute('data-id', this._media.id);
         
         $mediaWrapper.appendChild($img);
     }  

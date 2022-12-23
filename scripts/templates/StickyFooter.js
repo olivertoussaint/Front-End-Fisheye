@@ -1,4 +1,4 @@
-class Aside {
+class StickyFooter {
   constructor(photographer, medias) {
     this._photographer = photographer;
     this._medias = medias;
@@ -6,12 +6,12 @@ class Aside {
 
   getTotalLikes() {
     return this._medias.reduce(
-      (acc, currentValue) => acc + currentValue.likes,
+      (acc, curr) => acc + curr.likes,
       0
     );
   }
 
-  createAside() {
+  createStickyFooter() {
     const wrapper = `
             <span class="total-likes">
                 <span id="total_number_of_likes">${this.getTotalLikes()}</span> <i class="fas fa-heart" aria-label="likes"></i>

@@ -5,17 +5,17 @@ class PhotographerHomePage {
 
   createPhotographerHomePage() {
     const photographerHomePage = `
-    <div class="photographer_presentation">
-    <div class="photographer_presentation__data">
+    <div class="photographer_ID">
+    <div class="photographer_ID__data">
         <h1>${this._photographer.name}</h1>
-        <p class="place">${this._photographer.city}, ${this._photographer.country}</p>
+        <p class="location">${this._photographer.city}, ${this._photographer.country}</p>
         <p class="tagline">${this._photographer.tagline}</p>
     </div>
-    <div class="photographer_presentation__button">
+    <div class="photographer_ID__button">
         <button class="modal-btn" tabindex="0">Contactez-moi</button>
         <button class="modal-btn-mobile" tabindex="0">Contactez-moi</button>
     </div>
-    <div class="photographer_presentation__picture">
+    <div class="photographer_ID__picture">
         <img src="assets/images/${this._photographer.portrait}" alt="">
     </div>
 </div>
@@ -41,7 +41,7 @@ class PhotographerHomePage {
     </div>
     <section class="media_card__container"></section>
 </div>
-<aside class="aside"></aside>
+<div id="sticky_footer"></div>
         `;
     return photographerHomePage;
   }

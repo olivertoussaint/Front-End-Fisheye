@@ -1,5 +1,3 @@
-
-
 class App {
     constructor() {
         this.$photographersWrapper = document.querySelector('.photographers_section');
@@ -36,13 +34,38 @@ class App {
             const mediasOfThisPhotographer = displayMedias(mediasSortedByPopularity);
             createLinksOnMediasCards(mediasOfThisPhotographer);
 
-            const $asideWrapper = document.querySelector('.aside');
-            const asideTemplate = new Aside(photographer, mediasData);
-            $asideWrapper.innerHTML = asideTemplate.createAside();
+            const form = document.getElementById("form");
+            const $stickyWrapper = document.getElementById('sticky_footer');
+            const stickyTemplate = new StickyFooter(photographer, mediasData);
+            $stickyWrapper.innerHTML = stickyTemplate.createStickyFooter();
+
+            const $modalTitle = document.getElementById('modal-title');
+            $modalTitle.innerHTML += photographer.name
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (isValidatedForm()) {
+                    const form               = document.getElementById('form');
+                    const modalTitle = document.querySelector(".modal-title");
+                    form.style.display = "none";
+                    const dialogWindows = document.querySelector(".dialog-windows");
+            dialogWindows.classList.toggle("sent");
+                    modalTitle.innerHTML = `Votre message <br />a bien été envoyé <br /> à ${photographer.name}`;
+                    function closeSubmit() {
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                    closeSubmit()
+                }
+                launchAllFunctions();
+            })
+            
+
 
             manageClickOnHeartsBehaviour();
 
-            manageLightboxControls(mediasOfThisPhotographer);
+            // manageLightboxControls(mediasOfThisPhotographer);
             
             manageSortingFunctionality(mediasOfThisPhotographer);
 
@@ -56,14 +79,9 @@ class App {
             
             // manageModalControls();
 
-        } else {
-            this.$specificPhotographerWrapper.innerHTML = 
-                '<div class="error_message">La variable photographer que vous avez indiquée dans l\'URL n\' est pas un nombre.</div>';
-        }
-    }
 
-    displayErrorPage() {
-        console.log('Aucune page ne correspond malheureusement à cette adresse.');
+
+        } 
     }
 
 }
@@ -201,7 +219,7 @@ const manageSortingFunctionality = (array) => {
 
         displayMedias(array);
         manageClickOnHeartsBehaviour();
-        createLinksOnMediasCards(array);
+        createLinksOnMediasCards();
 
         let $hiddenButton = document.querySelector('.dropdown_menu .hidden button');
         const $activeOption = document.querySelector('.active_option');
@@ -228,85 +246,31 @@ const manageSortingFunctionality = (array) => {
     }               
 }
 
-const createLinksOnMediasCards = (array) => {
+const createLinksOnMediasCards = () => {
     const $mediasCards = document.querySelectorAll('.media_card__media');
+    const $dialog = document.getElementById('lightbox');
+    const $close = document.querySelector('.lightbox__close');
+   const $lightboxContainer = document.querySelector('.lightbox__container')
     
-    $mediasCards.forEach((card, index) => {
-        card.addEventListener('click', () => {
-            displayLightbox(array, index);
+    $mediasCards.forEach((item) => {
+        item.addEventListener('click', () => {
+            $dialog.classList.toggle("visible");
+            console.log(item.firstElementChild)
+            
+            
         });
-        card.addEventListener('keypress', (e) => {
+        item.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                displayLightbox(array, index);
+                $dialog.classList.toggle("visible");
             }
         });
     });
-
-    function displayLightbox(array, index) {
-        const lightbox = new Lightbox(array, index);
-        // lightbox.reinitialize();
-        lightbox.close();
-        lightbox.display();
-    }
-}
-
-
-const manageLightboxControls = (array) => {
-
-    const $lightboxCloseButton = document.querySelector('.lightbox__close');
-    const $lightboxNextButton = document.querySelector('.lightbox__next');
-    const $lightboxPreviousButton = document.querySelector('.lightbox__previous');
-
-    $lightboxCloseButton.addEventListener('click', () => closeLightbox(array));
-    $lightboxCloseButton.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            closeLightbox(array);
-        }
-    });
-
-    $lightboxNextButton.addEventListener('click', () => goToNextMedia(array));
-    $lightboxNextButton.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            goToNextMedia(array);
-        }
-    });
-
-    $lightboxPreviousButton.addEventListener('click', () => goToPreviousMedia(array));
-    $lightboxPreviousButton.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            goToPreviousMedia(array);
-        }
-    });
-
-    function closeLightbox(array) {
-        const $mediaWrapper = document.querySelector('.lightbox__container__media');
-        let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-        let index = array.findIndex((media) => media._id === mediaId);
-        const lightbox = new Lightbox(array, index);
-        lightbox.close();
-    }
-
-    function goToNextMedia(array) {
-        const $mediaWrapper = document.querySelector('.lightbox__container__media');
-        console.log($mediaWrapper)
-        let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-        let index = array.findIndex((media) => media._id === mediaId);
-        const lightbox = new Lightbox(array, index);
-        lightbox.next();
-    }
     
-    function goToPreviousMedia(array) {
-        const $mediaWrapper = document.querySelector('.lightbox__container__media');
-        let mediaId = parseInt($mediaWrapper.firstChild.dataset.mediaId);
-        let index = array.findIndex((media) => media._id === mediaId);
-        const lightbox = new Lightbox(array, index);
-        lightbox.previous();
-    }
-
+    $close.addEventListener('click', () => {
+        $dialog.classList.remove("visible")
+    })
+    
 }
-
-
-
 
 
 const currentPage = document.location.pathname;
@@ -322,7 +286,5 @@ switch (currentPage) {
     case '/fisheye/photographer.html':
         app.displayPhotographerPage();
         break;
-    default:
-        app.displayErrorPage();
 }
 

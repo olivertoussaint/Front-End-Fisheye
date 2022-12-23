@@ -8,7 +8,7 @@ class VideoCard extends MediaCard {
         $mediaCard.classList.add('media_card');
         const mediaCard = `
             <div class="media_card__media" tabindex="0" title="${this._media.title}" aria-labelledby="media_card__description__title">
-                <video  class="video-card" data-media-id=${this._media.id}>
+                <video  class="video-card" data-id=${this._media.id}>
                     <source src="assets/images/${this._media.photographerId}/${this._media.video}" type="video/mp4">
                 </video>
                 <div class="play-icon"><i class="far fa-play-circle"></i></div>
@@ -23,7 +23,7 @@ class VideoCard extends MediaCard {
     }
 
     createLightboxVideoCard() {
-        const $mediaWrapper = document.querySelector('.lightbox__container__media');
+        const $mediaWrapper = document.querySelector('.lightbox__container');
         
         const $source = document.createElement('source');
         $source.setAttribute('src', `assets/images/${this._media.photographerId}/${this._media.video}`);
@@ -33,7 +33,7 @@ class VideoCard extends MediaCard {
         $video.setAttribute('controls', 'controls');
         $video.setAttribute('title', this._media.title);
         $video.setAttribute('aria-label', this._media.title);
-        $video.setAttribute('data-media-id', this._media.id);
+        $video.setAttribute('data-id', this._media.id);
         $video.appendChild($source);
 
         $mediaWrapper.appendChild($video);

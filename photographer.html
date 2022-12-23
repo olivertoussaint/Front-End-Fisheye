@@ -89,21 +89,19 @@
 
     <!-- Lightbox modal -->
     <dialog id="lightbox" aria-hidden="true" aria-label="image rapprochée">
-      <div role="button" class="lightbox__close" tabindex="0" title="fermer la modale">
+      <button class="lightbox__close" tabindex="0" title="fermer la modale">
         <p class="sr-only">Fermer</p>
-        <span class="fas fa-times" aria-hidden="true"></span>
-      </div>
-      <div role="button" class="lightbox__next" tabindex="0" title="suivant">
+        <i class="fas fa-times" aria-hidden="true"></i>
+      </button>
+      <button class="lightbox__next" tabindex="0" title="suivant">
         <p class="sr-only">Suivant</p>
-        <span class="fas fa-angle-right" aria-hidden="true"></span>
-      </div>
-      <div role="button" class="lightbox__previous" tabindex="0" title="précédent">
+        <i class="fas fa-angle-right" aria-hidden="true"></i>
+      </button>
+      <button class="lightbox__previous" tabindex="0" title="précédent">
         <p class="sr-only">Précédent</p>
-        <span class="fas fa-angle-left" aria-hidden="true"></span>
-      </div>
-      <div class="lightbox__container__media">
-      </div>
-      <p class="lightbox__container__title"></p>
+        <i class="fas fa-angle-left" aria-hidden="true"></i>
+      </button>
+      <div class="lightbox__container"></div>
     </dialog>
 
 
@@ -118,7 +116,6 @@
       <div class="photographer_data"></div>
 
 </main> 
-<div class="media_card__container"></div>
 
 <!-- Models -->
 <script src="/scripts/models/Medias.js"></script>
@@ -135,7 +132,7 @@
     <script src="/scripts/templates/PhotographerHomePage.js"></script>
     <script src="/scripts/templates/ImageCard.js"></script>
     <script src="/scripts/templates/VideoCard.js"></script>
-    <script src="/scripts/templates/Aside.js"></script>
+    <script src="/scripts/templates/StickyFooter.js"></script>
     
     
     <!-- Api -->
