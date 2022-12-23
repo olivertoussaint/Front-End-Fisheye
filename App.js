@@ -255,9 +255,7 @@ const createLinksOnMediasCards = () => {
     $mediasCards.forEach((item) => {
         item.addEventListener('click', () => {
             $dialog.classList.toggle("visible");
-            console.log(item.firstElementChild)
-            
-            
+            console.log(item.firstElementChild);
         });
         item.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
