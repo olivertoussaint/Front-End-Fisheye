@@ -126,27 +126,3 @@ function isValidatedForm() {
         return true;
     }
 }
-
-
-// form.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     if (isValidatedForm()) {
-//         const form               = document.getElementById('form');
-//         const modalTitle = document.querySelector(".modal-title");
-//         form.style.display = "none";
-//         const dialogWindows = document.querySelector(".dialog-windows");
-// //         // // dialogWindows.style.height = "100px";
-// //         // // dialogWindows.style.paddingTop = "80px";
-// //         // // dialogWindows.style.paddingLeft = "70px";
-// dialogWindows.classList.toggle("sent");
-//         // modalTitle.innerHTML = `Votre message <br />a bien été envoyé à `;
-//         function closeSubmit() {
-//             setTimeout(() => {
-//                 window.location.reload();
-//             }, 200000);
-//         }
-//         closeSubmit()
-//     }
-//     launchAllFunctions();
-// })
-

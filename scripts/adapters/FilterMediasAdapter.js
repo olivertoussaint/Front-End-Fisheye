@@ -1,3 +1,0 @@
-class FilterMediasAdapter {
-    constructor(M)
-}

@@ -274,7 +274,7 @@ h1.main-title {
   border-radius: 0.6rem;
   color: black;
   width: 350px;
-  height: 61vh;
+  height: auto;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -291,7 +291,7 @@ h1.main-title {
 }
 .close-btn {
   position: relative;
-  bottom: 35px;
+  bottom: 26px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -350,13 +350,6 @@ form div {
   align-items: self-start;
   margin-bottom: 0.8rem;
 }
-
-/* form {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-  } */
 
 form input {
   width: 100%;
@@ -474,7 +467,6 @@ form textarea {
 
 .photographer_portfolio__sorted_by #sortBy {
   width: 100px;
-  /* line-height: 2.3; */
 }
 
 .dropdown_menu .listbox {
@@ -553,7 +545,7 @@ form textarea {
 .media_card__media .img-card,
 .video-card {
   width: 100%;
-  height: 50vh;
+  height: 215px;
   border-radius: 0.2rem;
   object-fit: fill;
   cursor: pointer;
@@ -621,15 +613,22 @@ form textarea {
 #lightbox {
   position: fixed;
   border: none;
+  top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.804);
   z-index: 600;
+  display: none;
   animation: lightboxIn 0.5s;
+  transition: 0.3s;
 }
 
-#lightbox.visible {
-  display: flex;
+#lightbox.fadeOut {
+  opacity: 0;
+}
+
+#lightbox.active {
+  display: block;
 }
 
 @keyframes lightboxIn {
@@ -647,7 +646,7 @@ form textarea {
   justify-content: center;
   align-items: center;
   border: none;
-  width: 150px;
+  width: 70px;
   height: 50px;
   top: 20px;
   right: 20px;
@@ -671,10 +670,10 @@ form textarea {
   min-height: 100vh;
 }
 
-.lightbox__container img,
-.lightbox__container video {
+.lightbox__container .lightbox-img-card,
+.lightbox__container .lightbox-video-card {
   max-width: 100%;
-  height: auto;
+  height: 90vh;
   animation: lightboxIn 0.5s;
 }
 
@@ -683,9 +682,15 @@ form textarea {
   padding: 0;
   width: 100%;
   font-size: 24px;
+  font-weight: 600;
   line-height: 50px;
-  text-align: left;
   color: #911c1c;
+  position: relative;
+  bottom: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  left: 95px;
 }
 
 .lightbox__next,
@@ -745,10 +750,9 @@ form textarea {
     font-size: 1.75rem;
   }
 
-  .media_card__media,
-  .img-card,
+  .media_card__media .img-card,
   .video-card {
-    height: 51vh;
+    height: 500px;
   }
 
   .media_card__footer {
@@ -760,11 +764,12 @@ form textarea {
   }
 }
 
-/* @media screen and (max-width: 1440px) {
-  .media_card__media .img-card,.video-card {
+@media screen and (max-width: 1440px) {
+  .media_card__media .img-card,
+  .video-card {
     height: 350px;
   }
-} */
+}
 
 /* @media screen and (max-width: 768px) {
   #main {
@@ -801,10 +806,62 @@ form textarea {
     grid-template-columns: 1fr;
     gap: 60px;
   }
+  #main {
+    margin: 0 0.5rem;
+  }
+  .photographer_portfolio__sorted_by .dropdown_menu {
+    left: 160px;
+  }
+  .media_card__footer .media_card__title,
+  .number_of_likes,
+  .heart {
+    font-size: 1.2rem;
+  }
   .media_card__container {
     grid-template-columns: 1fr;
     column-gap: 50px;
     row-gap: 30px;
+  }
+  .modal-btn-mobile {
+    padding: 0.8rem 0.5rem;
+    font-size: 1rem;
+    bottom: 4rem;
+  }
+  .dialog-windows {
+    max-width: 300px;
+  }
+  .lightbox__container {
+    min-height: 96vh;
+  }
+  .lightbox__close {
+    right: 0;
+  }
+  .lightbox__close,
+  .lightbox__next,
+  .lightbox__previous {
+    font-size: 29px;
+  }
+  .lightbox__container .lightbox-img-card {
+    height: 240px;
+  }
+  .lightbox__container .lightbox-video-card {
+    height: 171px;
+  }
+  .lightbox__container__title {
+    font-size: 17px;
+    bottom: 37%;
+    left: 53px;
+  }
+  #sticky_footer {
+    padding: 0.4rem 0.3rem 0.2rem 0.3rem;
+    font-size: 0.8rem;
+    right: 3%;
+  }
+  .total-likes {
+    width: 43px;
+  }
+  .price-container {
+    width: 80px;
   }
 }
 

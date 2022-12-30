@@ -29,7 +29,6 @@ class FilterDropdown {
         </div>
         
         `
-
         this.$wrapper.innerHTML = filterDropdown
 
         this.$filterDropdownWrapper.appendChild(this.$wrapper)
