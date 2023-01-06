@@ -110,19 +110,15 @@ function checkMsg() {
 
 // LAUNCH ALL FUNCTIONS
 function launchAllFunctions() {
-    checkFirstName()
-    checkLastName()
-    checkEmail()
-    checkMsg()
+  checkFirstName();
+  checkLastName();
+  checkEmail();
+  checkMsg();
 }
 
 // CHECK ANNY TROUBLE MUST BE TRUE
 function isValidatedForm() {
-    if(checkFirstName()
-    && checkLastName()
-    && checkEmail()
-    && checkMsg()
-    ) {
-        return true;
-    }
+  if (checkFirstName() && checkLastName() && checkEmail() && checkMsg()) {
+    return true;
+  }
 }

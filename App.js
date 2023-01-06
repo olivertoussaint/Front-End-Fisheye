@@ -45,6 +45,29 @@ class App {
       const mediasPhotographer = displayMedias(mediasSortedByPopularity);
       createLinksOnMediasCards(mediasPhotographer);
 
+      const buttonModal = document.querySelector(".modal-btn");
+      const buttonModalMobile = document.querySelector(".modal-btn-mobile");
+      const dialog = document.querySelector(".dialog");
+      const main = document.querySelector("#main");
+      const closeButton = document.querySelector(".close-btn");
+      buttonModal.addEventListener("click", displayModal);
+      buttonModalMobile.addEventListener("click", displayModal);
+
+      closeButton.addEventListener("click", closeModal);
+
+      function displayModal() {
+        dialog.classList.toggle("opened");
+        main.classList.add("anti-scroll");
+        main.setAttribute("aria-hidden", "true");
+        dialog.setAttribute("aria-hidden", "false");
+      }
+
+      function closeModal() {
+        dialog.classList.remove("opened");
+        main.classList.remove("anti-scroll");
+        main.setAttribute("aria-hidden", "false");
+        dialog.setAttribute("aria-hidden", "true");
+      }
       const form = document.getElementById("form");
       const $stickyWrapper = document.getElementById("sticky_footer");
       const stickyTemplate = new StickyFooter(photographer, mediasData);
@@ -74,7 +97,7 @@ class App {
 
       manageClickOnHeartsBehaviour();
       manageLightboxControls(mediasPhotographer);
-      manageSortingFunctionality(mediasPhotographer);
+      manageSorting(mediasPhotographer);
     }
   }
 }
@@ -95,8 +118,8 @@ const displayMedias = (array) => {
 
   mediasPhotographer.forEach((media) => {
     if (media instanceof Image) {
-      const mediaTemplate = new ImageCard(media);
-      $mediasWrapper.appendChild(mediaTemplate.createImageCard());
+      const mediaTemplate = new PictureCard(media);
+      $mediasWrapper.appendChild(mediaTemplate.createPictureCard());
     } else if (media instanceof Video) {
       const mediaTemplate = new MediaCardWidthPlayer(media);
       $mediasWrapper.appendChild(mediaTemplate.createMediaCardWithPlayer());
@@ -111,16 +134,16 @@ const manageClickOnHeartsBehaviour = () => {
 
   $hearts.forEach((heart) => {
     heart.addEventListener("click", () => {
-      addOrReduceNumberOfLikes(heart);
+      toggleLikes(heart);
     });
     heart.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
-        addOrReduceNumberOfLikes(heart);
+        toggleLikes(heart);
       }
     });
   });
 
-  function addOrReduceNumberOfLikes(heart) {
+  function toggleLikes(heart) {
     heart.parentElement.classList.toggle("liked");
     const $numberOfLikes = heart.parentElement.firstChild;
     const $totalNumberOfLikes = document.getElementById(
@@ -140,15 +163,15 @@ const manageClickOnHeartsBehaviour = () => {
   }
 };
 
-const manageSortingFunctionality = (array) => {
+const manageSorting = (array) => {
   const $listbox = document.querySelector(".listbox");
   const $angleUp = document.querySelector(".fa-angle-up");
   const $angleDown = document.querySelector(".fa-angle-down");
   const $sortingOptions = Array.from(
     document.querySelectorAll(".sorting_option")
   );
-  const $optionsShown = document.querySelectorAll(".dropdown_menu > button");
-  let fullyExpandedMenu = false;
+  const $optionsVisible = document.querySelectorAll(".dropdown_menu > button");
+  let dropdownContent = false;
 
   $listbox.addEventListener("click", () => {
     openOrCloseListbox();
@@ -171,19 +194,19 @@ const manageSortingFunctionality = (array) => {
   });
 
   function openOrCloseListbox() {
-    if (fullyExpandedMenu === false) {
+    if (dropdownContent === false) {
       $sortingOptions.forEach((option) => {
         option.style.display = "block";
       });
-      fullyExpandedMenu = true;
+      dropdownContent = true;
       $angleUp.style.display = "block";
       $listbox.setAttribute("aria-expanded", "true");
-      $optionsShown[0].focus();
+      $optionsVisible[0].focus();
     } else {
       $sortingOptions.forEach((option) => {
         option.style.display = "none";
       });
-      fullyExpandedMenu = false;
+      dropdownContent = false;
     }
     if ($angleDown !== null) {
       $angleDown.style.display = "none";
@@ -224,12 +247,12 @@ const manageSortingFunctionality = (array) => {
     document.querySelector(".dropdown_menu").appendChild($hiddenButton);
 
     $hiddenButton = document.querySelector(".dropdown_menu .hidden button");
-    const $optionsShown = document.querySelectorAll(".dropdown_menu > button");
+    const $optionsVisible = document.querySelectorAll(".dropdown_menu > button");
 
-    fullyExpandedMenu = false;
+    dropdownContent = false;
     $angleUp.style.display = "none";
     $hiddenButton.setAttribute("aria-selected", "true");
-    $optionsShown.forEach((option) => {
+    $optionsVisible.forEach((option) => {
       option.style.display = "none";
       option.setAttribute("aria-selected", "false");
     });

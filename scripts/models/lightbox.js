@@ -14,13 +14,14 @@ class Lightbox {
         $lightbox.setAttribute('aria-hidden', 'false');
         $lightbox.classList.add('active')
         const media = this._array[this._index];
+        console.log(media)
         
         if (media instanceof Image) {
-            const imageCardTemplate = new ImageCard(media);
-            imageCardTemplate.createLightboxImageCard();
+            const imageCardTemplate = new PictureCard(media);
+            imageCardTemplate.createLightboxPictureCard();
         } else if (media instanceof Video) {
-            const videoCardTemplate = new MediaCardWidthPlayer (media)
-            videoCardTemplate.createLightboxVideoCard();
+            const videoCardTemplate = new MediaCardWidthPlayer(media)
+            videoCardTemplate.createLightboxMediaCardWidthPlayer();
         }
         const $title = document.querySelector('.lightbox__container__title');
         const title = media._title;
@@ -61,8 +62,8 @@ class Lightbox {
 
         const $nextSlide = this._array[nextSlide];
         if ($nextSlide instanceof Image) {
-            const imageCardTemplate = new ImageCard(this._array[nextSlide]);
-            imageCardTemplate.createLightboxImageCard();
+            const imageCardTemplate = new PictureCard(this._array[nextSlide]);
+            imageCardTemplate.createLightboxPictureCard();
         } else if ($nextSlide instanceof Video) {
             const videoCardTemplate = new MediaCardWidthPlayer(this._array[nextSlide])
             videoCardTemplate.createLightboxMediaCardWidthPlayer();
@@ -84,8 +85,8 @@ class Lightbox {
 
         const $previousSlide = this._array[previousSlide];
         if ($previousSlide instanceof Image) {
-            const imageCardTemplate = new ImageCard(this._array[previousSlide]);
-            imageCardTemplate.createLightboxImageCard();
+            const imageCardTemplate = new PictureCard(this._array[previousSlide]);
+            imageCardTemplate.createLightboxPictureCard();
         } else if ($previousSlide instanceof Video) {
             const videoCardTemplate = new MediaCardWidthPlayer(this._array[previousSlide])
             videoCardTemplate.createLightboxMediaCardWidthPlayer();

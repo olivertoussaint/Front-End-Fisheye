@@ -1,12 +1,12 @@
 class MediaCardWidthPlayer extends MediaCard {
-    constructor(media) {
-        super(media);
-    }
+  constructor(media) {
+    super(media);
+  }
 
-    createMediaCardWithPlayer() {
-        const $mediaCard = document.createElement('article');
-        $mediaCard.classList.add('media_card');
-        const mediaCard = `
+  createMediaCardWithPlayer() {
+    const $mediaCard = document.createElement("article");
+    $mediaCard.classList.add("media_card");
+    const mediaCard = `
             <div class="media_card__media" tabindex="0" title="${this._media.title}" aria-labelledby="media_card__description__title">
                 <video class="video-card" data-media-id=${this._media.id}>
                     <source src="assets/images/${this._media.photographerId}/${this._media.video}" type="video/mp4">
@@ -18,25 +18,28 @@ class MediaCardWidthPlayer extends MediaCard {
                 <p class="media_card__NumberOfLikes"><span class="number_of_likes">${this._media.likes}</span> <span class="heart"><i class="fas fa-heart" tabindex="0" aria-label="Cliquez pour liker le média"></i></span></p>
             </div>
         `;
-        $mediaCard.innerHTML = mediaCard;
-        return $mediaCard;
-    }
+    $mediaCard.innerHTML = mediaCard;
+    return $mediaCard;
+  }
 
-    createLightboxMediaCardWidthPlayer() {
-        const $mediaWrapper = document.querySelector('.lightbox__container');
-        
-        const $source = document.createElement('source');
-        $source.setAttribute('src', `assets/images/${this._media.photographerId}/${this._media.video}`);
-        $source.setAttribute('type', 'video/mp4');
+  createLightboxMediaCardWidthPlayer() {
+    const $mediaWrapper = document.querySelector(".lightbox__container");
 
-        const $video = document.createElement('video');
-        $video.setAttribute('class', 'lightbox-video-card')
-        $video.setAttribute('controls', 'controls');
-        $video.setAttribute('title', this._media.title);
-        $video.setAttribute('aria-label', this._media.title);
-        $video.setAttribute('data-media-id', this._media.id);
-        $video.appendChild($source);
+    const $source = document.createElement("source");
+    $source.setAttribute(
+      "src",
+      `assets/images/${this._media.photographerId}/${this._media.video}`
+    );
+    $source.setAttribute("type", "video/mp4");
 
-        $mediaWrapper.appendChild($video);
-    }    
+    const $video = document.createElement("video");
+    $video.setAttribute("class", "lightbox-video-card");
+    $video.setAttribute("controls", "controls");
+    $video.setAttribute("title", this._media.title);
+    $video.setAttribute("aria-label", this._media.title);
+    $video.setAttribute("data-media-id", this._media.id);
+    $video.appendChild($source);
+
+    $mediaWrapper.appendChild($video);
+  }
 }

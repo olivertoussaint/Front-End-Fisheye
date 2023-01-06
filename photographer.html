@@ -1,88 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/icons/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/6995ef9b38.js" crossorigin="anonymous"></script>
-    <title>Fisheye - photographe </title>
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
+      rel="stylesheet"
+    >
+    <script
+      src="https://kit.fontawesome.com/6995ef9b38.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Fisheye - photographe</title>
   </head>
   <body>
-    
     <!-- contact-form modal -->
-    <section class="dialog" id="contact_modal" role="dialog" aria-hidden="true" aria-label="formulaire de contact">
+    <section
+      class="dialog"
+      id="contact_modal"
+      role="dialog"
+      aria-hidden="true"
+      aria-label="formulaire de contact"
+    >
       <div class="dialog-windows">
-          <div class="modal-header">
-              <h1 class="modal-title" role="Heading" id="modal-title">Contactez-moi <br /></h1>
-              <button class="close-btn" role="Button"><img class="img-size" src="./assets/icons/close.svg" title="fermer la modale"></button>    
+        <div class="modal-header">
+          <h1 class="modal-title" id="modal-title">Contactez-moi <br></h1>
+          <button class="close-btn">
+            <img
+              class="img-size"
+              src="./assets/icons/close.svg"
+              title="fermer la modale"
+            >
+          </button>
+        </div>
+        <form id="form" name="contact" method="post">
+          <div class="formData">
+            <label>Prénom</label>
+            <input
+              class="text-control"
+              type="text"
+              id="first"
+              name="first"
+              aria-label="Entrez votre prenom"
+              aria-required="true"
+              onkeydown="backgroundChangeColor()"
+              onkeyup="checkFirstName()"
+            >
+            <small id="first-error"></small>
           </div>
-          <form id="form" name="contact" method="post">
-            <div class="formData">
-              <label role="Label">Prénom</label>
-              <input 
-                class="text-control" 
-                type="text" 
-                id="first" 
-                name="first" 
-                role="Text field"
-                aria-label="Entrez votre prenom"
-                aria-required="true"
-                onkeydown="backgroundChangeColor()"
-                onkeyup="checkFirstName()"
-              />
-              <small id="first-error"></small>
-            </div>
-            <div class="formData">
-              <label role="Label">Nom</label>
-              <input 
-                class="text-control" 
-                type="text" 
-                id="last"  
-                name="last" 
-                role="Text field"
-                aria-label="Entrez votre nom"
-                aria-required="true" 
-                onkeyup= "checkLastName()"
-              />
-              <small id="last-error"></small>
-            </div>
-            <div class="formData">
-              <label role="Label">Email</label>
-              <input 
-                class="text-control" 
-                type="email" 
-                id="email"  
-                name="email" 
-                role="Text field"
-                aria-label="entrez votre mail"
-                aria-required="true"
-                onkeyup="checkEmail()" 
-              />
-              <small id="email-error"></small>
-            </div>
-            <div class="formData">
-              <label role="Label">Votre Message</label>
-              <textarea 
-                class="msg-data text-control"
-                type="textarea"
-                id="msg" 
-                name="msg" 
-                role="Text field"
-                aria-required="true" 
-                onkeyup="checkMsg()"
-                >
-              </textarea>
-              <small id="textarea-error"></small>
-            </div>
-            <input 
-              class="btn-submit" 
-              type="submit" 
-              value="Envoyer" 
-              role="Button"
-              aria-label="Envoyer le message" 
-            />
-          </form>
+          <div class="formData">
+            <label>Nom</label>
+            <input
+              class="text-control"
+              type="text"
+              id="last"
+              name="last"
+              aria-label="Entrez votre nom"
+              aria-required="true"
+              onkeyup="checkLastName()"
+            >
+            <small id="last-error"></small>
+          </div>
+          <div class="formData">
+            <label>Email</label>
+            <input
+              class="text-control"
+              type="email"
+              id="email"
+              name="email"
+              aria-label="entrez votre mail"
+              aria-required="true"
+              onkeyup="checkEmail()"
+            >
+            <small id="email-error"></small>
+          </div>
+          <div class="formData">
+            <label>Votre Message</label>
+            <textarea
+              class="msg-data text-control"
+              id="msg"
+              name="msg"
+              aria-required="true"
+              onkeyup="checkMsg()"
+            >
+            </textarea>
+            <small id="textarea-error"></small>
+          </div>
+          <input
+            class="btn-submit"
+            type="submit"
+            value="Envoyer"
+            aria-label="Envoyer le message"
+          >
+        </form>
       </div>
       <div class="overlay"></div>
     </section>
@@ -90,63 +101,68 @@
     <!-- Lightbox modal -->
     <dialog id="lightbox" aria-hidden="true" aria-label="image rapprochée">
       <button class="lightbox__close" tabindex="0" title="fermer la modale">
-        <p class="sr-only">Fermer</p>
         <i class="fas fa-times" aria-hidden="true"></i>
       </button>
+      <p class="sr-only">Fermer</p>
       <button class="lightbox__next" tabindex="0" title="suivant">
-        <p class="sr-only">Suivant</p>
         <i class="fas fa-angle-right" aria-hidden="true"></i>
       </button>
+      <p class="sr-only">Suivant</p>
       <button class="lightbox__previous" tabindex="0" title="précédent">
-        <p class="sr-only">Précédent</p>
         <i class="fas fa-angle-left" aria-hidden="true"></i>
       </button>
+      <p class="sr-only">Précédent</p>
       <div class="lightbox__container"></div>
       <p class="lightbox__container__title"></p>
     </dialog>
 
-
-    <header id="header" role="banner" aria-hidden="false">
+    <header id="header" aria-hidden="false">
       <div class="header-top">
-        <a href="./index.html" title="retour à la page d'accueil" id="backToHomePage">
-          <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" aria-labelledby="backToHomePage" />
+        <a
+          href="./index.html"
+          title="retour à la page d'accueil"
+          id="backToHomePage"
+        >
+          <img
+            src="assets/images/logo.png"
+            class="logo"
+            alt="Fisheye Home page"
+            aria-labelledby="backToHomePage"
+          >
         </a>
       </div>
     </header>
     <main id="main" aria-hidden="false">
       <div class="photographer_data"></div>
+    </main>
 
-</main> 
+    <!-- Models -->
+    <script src="/scripts/models/Medias.js"></script>
+    <script src="/scripts/models/Photographer.js"></script>
+    <script src="/scripts/models/Lightbox.js"></script>
+    <script src="/scripts/models/Image.js"></script>
+    <script src="/scripts/models/Video.js"></script>
 
-<!-- Models -->
-<script src="/scripts/models/Medias.js"></script>
-<script src="/scripts/models/Photographer.js"></script>
-<script src="/scripts/models/Lightbox.js"></script>
-<script src="/scripts/models/Image.js"></script>
-<script src="/scripts/models/Video.js"></script>
-
-<!-- Factories -->
-<script src="/scripts/factories/MediaFactory.js"></script>
+    <!-- Factories -->
+    <script src="/scripts/factories/MediaFactory.js"></script>
 
     <!--Templates -->
     <script src="/scripts/templates/MediaCard.js"></script>
     <script src="/scripts/templates/PhotographerHomePage.js"></script>
-    <script src="/scripts/templates/ImageCard.js"></script>
+    <script src="/scripts/templates/PictureCard.js"></script>
     <script src="/scripts/templates/MediaCardWidthPlayer.js"></script>
     <script src="/scripts/templates/StickyFooter.js"></script>
-    
-    
+
     <!-- Api -->
     <script src="/scripts/api/Api.js"></script>
     <script src="/scripts/api/PhotographerApi.js"></script>
     <script src="/scripts/api/MediaApi.js"></script>
-    
-      <!-- Utils --> 
-      <script src="/scripts/utils/modals.js"></script>
-      <script src="/scripts/utils/checkValidationForm.js"></script>
-      
-      <!-- Entry point -->
-      <script src="/App.js"></script>
-    
+
+    <!-- Utils -->
+    <script src="/scripts/utils/modals.js"></script>
+    <script src="/scripts/utils/checkValidationForm.js"></script>
+
+    <!-- Entry point -->
+    <script src="/App.js"></script>
   </body>
 </html>

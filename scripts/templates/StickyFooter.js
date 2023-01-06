@@ -5,10 +5,7 @@ class StickyFooter {
   }
 
   getTotalLikes() {
-    return this._medias.reduce(
-      (acc, curr) => acc + curr.likes,
-      0
-    );
+    return this._medias.reduce((acc, curr) => acc + curr.likes, 0);
   }
 
   createStickyFooter() {

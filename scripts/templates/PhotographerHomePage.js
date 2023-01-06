@@ -19,8 +19,8 @@ class PhotographerHomePage {
         <img src="assets/images/${this._photographer.portrait}" alt="">
     </div>
 </div>
-<div class="photographer_portfolio">
-    <div class="photographer_portfolio__sorted_by">
+<div class="photographer_gallery">
+    <div class="photographer_gallery__sorted_by">
         <h3 class="sortBy">Trier par</h3>
         <div class="dropdown_menu">
             <div class="listbox" role="button" tabindex="0" aria-label="trier les médias par ..."
@@ -30,12 +30,12 @@ class PhotographerHomePage {
                 <i class="fas fa-angle-up"></i>
             </div>
             <div class="hidden">
-                <button class="sorting_option" value="popularity" role="listbox" tabindex="0" aria-label="tri des médias par popularité"
+                <button class="sorting_option" value="popularity" role="listbox" tabindex="0" aria-label="tri des médias par la popularité"
                     aria-selected="true">Popularité</button>
             </div>
-            <button class="sorting_option" value="date" role="listbox" tabindex="0" aria-label="tri des médias par date"
+            <button class="sorting_option" value="date" role="listbox" tabindex="0" aria-label="tri des médias par la date"
                 aria-selected="false">Date</button>
-            <button class="sorting_option" value="title" role="listbox" tabindex="0" aria-label="tri des médias par titre"
+            <button class="sorting_option" value="title" role="listbox" tabindex="0" aria-label="tri des médias par le titre"
                 aria-selected="false">Titre</button>
         </div>
     </div>
