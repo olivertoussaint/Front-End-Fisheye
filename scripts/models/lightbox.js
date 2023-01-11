@@ -14,7 +14,6 @@ class Lightbox {
         $lightbox.setAttribute('aria-hidden', 'false');
         $lightbox.classList.add('active')
         const media = this._array[this._index];
-        console.log(media)
         
         if (media instanceof Image) {
             const imageCardTemplate = new PictureCard(media);
