@@ -3,7 +3,7 @@ class App {
     this.$photographersWrapper = document.querySelector(
       ".photographers_section"
     );
-    this.$specificPhotographerWrapper =
+    this.$photographerDataWrapper =
       document.querySelector(".photographer_data");
     this._photographerApi = new PhotographerApi("data/photographers.json");
     this._mediaApi = new MediaApi("data/photographers.json");
@@ -32,9 +32,9 @@ class App {
         await this._photographerApi.getPhotographerDataByPhotographerId(
           photographerId
         );
-      const photographerPageTemplate = new PhotographerHomePage(photographer);
-      this.$specificPhotographerWrapper.innerHTML =
-        photographerPageTemplate.createPhotographerHomePage();
+      const photographerHomePageTemplate = new PhotographerHomePage(photographer);
+      this.$photographerDataWrapper.innerHTML =
+        photographerHomePageTemplate.createPhotographerHomePage();
 
       const mediasData = await this._mediaApi.getMediasDataByPhotographerId(
         photographerId
@@ -43,7 +43,7 @@ class App {
         (a, b) => b.likes - a.likes
       );
       const mediasPhotographer = displayMedias(mediasSortedByPopularity);
-      createLinksOnMediasCards(mediasPhotographer);
+      mediasCardsLinks(mediasPhotographer);
 
       const buttonModal = document.querySelector(".modal-btn");
       const buttonModalMobile = document.querySelector(".modal-btn-mobile");
@@ -174,11 +174,11 @@ const manageSorting = (array) => {
   let dropdownContent = false;
 
   $listbox.addEventListener("click", () => {
-    openOrCloseListbox();
+    toggleListbox();
   });
   $listbox.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
-      openOrCloseListbox();
+      toggleListbox();
     }
   });
 
@@ -193,7 +193,7 @@ const manageSorting = (array) => {
     });
   });
 
-  function openOrCloseListbox() {
+  function toggleListbox() {
     if (dropdownContent === false) {
       $sortingOptions.forEach((option) => {
         option.style.display = "block";
@@ -230,7 +230,7 @@ const manageSorting = (array) => {
 
     displayMedias(array);
     manageClickOnHeartsBehaviour();
-    createLinksOnMediasCards();
+    mediasCardsLinks(array);
 
     let $hiddenButton = document.querySelector(".dropdown_menu .hidden button");
     const $activeOption = document.querySelector(".active_option");
@@ -247,7 +247,9 @@ const manageSorting = (array) => {
     document.querySelector(".dropdown_menu").appendChild($hiddenButton);
 
     $hiddenButton = document.querySelector(".dropdown_menu .hidden button");
-    const $optionsVisible = document.querySelectorAll(".dropdown_menu > button");
+    const $optionsVisible = document.querySelectorAll(
+      ".dropdown_menu > button"
+    );
 
     dropdownContent = false;
     $angleUp.style.display = "none";
@@ -260,7 +262,7 @@ const manageSorting = (array) => {
   }
 };
 
-const createLinksOnMediasCards = (array) => {
+const mediasCardsLinks = (array) => {
   const $mediasCards = document.querySelectorAll(".media_card__media");
 
   $mediasCards.forEach((card, index) => {
