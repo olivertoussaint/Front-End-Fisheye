@@ -505,8 +505,10 @@ form textarea {
 }
 .picture-card:hover,
 .video-card:hover {
-  opacity: 1;
-  animation: flash 1.2s;
+  transform: rotate3d(2, -1, 1, 5deg);
+  border-radius: 100% 100% 100% 100% / 100% 100% 100% 100%;
+  box-shadow: -0.5px 0px 20px #db8876;
+  animation: morph 2s ease-in-out infinite;
 }
 @keyframes flash {
   0% {
