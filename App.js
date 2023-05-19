@@ -291,21 +291,21 @@ const manageLightboxControls = (array) => {
   const $mediaWrapper = document.querySelector(".lightbox__container");
 
   $lightboxCloseButton.addEventListener("click", () => closeLightbox(array));
-  $lightboxCloseButton.addEventListener("keypress", (e) => {
+  $lightboxCloseButton.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       closeLightbox(array);
     }
   });
 
   $lightboxNextButton.addEventListener("click", () => nextSlide(array));
-  $lightboxNextButton.addEventListener("keypress", (e) => {
+  $lightboxNextButton.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") {
       nextSlide(array);
     }
   });
 
   $lightboxPreviousButton.addEventListener("click", () => previousSlide(array));
-  $lightboxPreviousButton.addEventListener("keypress", (e) => {
+  $lightboxPreviousButton.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") {
       previousSlide(array);
     }
