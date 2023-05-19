@@ -596,20 +596,21 @@ form textarea {
   font-size: 42px;
 }
 .lightbox__container, .lightbox__container.second {
+  width: 60%;
   position: relative;
   top: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 60px;
-  margin-right: 60px;
+  margin-left: 25em;
+  /* margin-right: 60px; */
   min-height: 85vh;
 }
 .lightbox__container.second {
   min-height: 5vh;
 }
 .lightbox__container .lightbox-picture-card {
-  max-width: 100%;
+  width: 40em;
   height: 84vh;
   animation: lightboxIn 0.5s;
 }
@@ -617,10 +618,10 @@ form textarea {
   height: 26vh;
 }
 .lightbox__container__title {
-  margin: 0;
-  padding: 0;
   width: 100%;
   height: 5vh;
+  margin-left: 10.5em;
+  padding: 0;
   font-size: 24px;
   font-weight: 600;
   line-height: 50px;
@@ -629,18 +630,17 @@ form textarea {
   bottom: 0;
   display: flex;
   align-items: center;
-  justify-content: start;
+  /* justify-content: start; */
 }
 .lightbox__next,
 .lightbox__previous {
-  position: fixed;
   border: none;
-  top: 50%;
-  margin-top: 25px;
-  top: 0;
-  right: 0;
   width: 50px;
   height: 100%;
+  position: fixed;
+  margin-top: -14px;
+  top: 0;
+  right: 0;
   z-index: 11;
 }
 .lightbox__previous {
@@ -648,7 +648,7 @@ form textarea {
   left: 0;
 }
 #lightbox button {
-  opacity: 0.9;
+  opacity: 0.8;
   cursor: pointer;
   transition: opacity 0.3s;
 }
@@ -695,11 +695,8 @@ form textarea {
     font-size: 2rem;
   }
   .lightbox__container .lightbox-video-card {
-    height: 85vh;
+    height: 38.3vh;
   }
-  /* .lightbox__container__title {
-    left: 335px;
-  } */
 }
 @media screen and (max-width: 1919px) {
   #main {
@@ -745,6 +742,16 @@ form textarea {
   .media_card {
     width: 44vw;
   }
+  .lightbox__container .lightbox-picture-card {
+    width: 31em;
+    height: 85vh;
+  }
+  .lightbox__container, .lightbox__container .second {
+    margin-left: 10em;
+  }
+  .lightbox__container__title {
+    margin-left: -20.2em;
+  }
 }
 @media screen and (max-width: 768px) {
   .photographers_section {
@@ -776,9 +783,6 @@ form textarea {
     row-gap: 19px;
     column-gap: 24px;
   }
-  /* .media_card {
-    width: 42vw;
-  } */
   .media_card__media .picture-card,
   .video-card {
     height: 240px;
@@ -806,6 +810,23 @@ form textarea {
     padding: .4rem .5rem;
     line-height: 1;
   }
+  .lightbox__container, .lightbox__container .second {
+    width: 62%;
+    top: 135px;
+    margin-left: 7em;
+    min-height: 68vh;
+  }
+  .lightbox__container .lightbox-picture-card {
+    min-width: 30em;
+    height: 55vh;
+    object-fit: fill;
+  }
+  .lightbox__container .lightbox-video-card {
+    height: 30vh;
+  }
+  .lightbox__container__title {
+    margin-left: -28.9em;
+  }
 }
 @media screen and (max-width: 600px) {
   #main {
@@ -817,7 +838,7 @@ form textarea {
   }
   .lightbox__container .lightbox-video-card {
     height: 24vh;
-}
+  }
   .play-icon {
     bottom: -49px;
   }
@@ -891,19 +912,19 @@ form textarea {
     font-size: 29px;
   }
   .lightbox__container .lightbox-picture-card {
-    height: 35vh;
+    height: 49vh;
+    min-width: 21em;
     object-fit: fill;
   }
   .lightbox__container .lightbox-video-card {
-    height: 150px;
     width: 65vw;
   }
   .lightbox__container {
     position: relative;
-    top: 287px;
+    top: 243px;
     display: flex;
     align-items: center;
-    margin-left: 60px;
+    margin-left: 90px;
     margin-right: 60px;
     min-height: 45vh;
 }
@@ -911,10 +932,10 @@ form textarea {
   min-height: 40vh;
 }
   .lightbox__container__title {
-    width: 180px;
-    font-size: .8rem;
+    width: 100%;
+    font-size: 1rem;
     position: relative;
-    left: -21px;
+    left: -11em;
   }
   #sticky_footer {
     padding: 0.4rem 0.3rem 0.2rem 0.3rem;
@@ -946,5 +967,16 @@ form textarea {
   .photographer_ID__picture img {
     width: 130px;
     height: 130px;
+  }
+  .lightbox__container .lightbox-picture-card {
+    min-width: 14em;
+    height: 30vh;
+  }
+  .lightbox__container, .lightbox__container .second {
+    margin-left: 4em;
+  }
+  .lightbox__container__title {
+    top: -5.5em;
+    margin-left: -52.5em;
   }
 }
