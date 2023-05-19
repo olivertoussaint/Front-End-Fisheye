@@ -116,7 +116,7 @@ function launchAllFunctions() {
   checkMsg();
 }
 
-// CHECK ANNY TROUBLE MUST BE TRUE
+// CHECK ANY TROUBLE MUST BE TRUE
 function isValidatedForm() {
   if (checkFirstName() && checkLastName() && checkEmail() && checkMsg()) {
     return true;
