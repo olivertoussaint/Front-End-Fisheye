@@ -620,15 +620,13 @@ form textarea {
   height: calc(28vh - 10vh);
 }
 .lightbox__container__title {
-  width: 100%;
+  width: auto;
   padding: 0;
   font-size: 1.8rem;
   font-weight: 600;
   line-height: 50px;
   color: #911c1c;
   position: fixed;
-}
-.lightbox__container__title {
   margin-left: -11rem;
   display: grid;
   grid-template-columns: minmax(183px, 1fr);
@@ -762,7 +760,7 @@ form textarea {
   }
   .lightbox__container, .lightbox__container.second {
     top: 32px;
-    width: 42%;
+    width: 66%;
   }
   .lightbox__container .lightbox-picture-card {
     width: calc(100% - 10px);
@@ -777,17 +775,18 @@ form textarea {
     display: grid;
     grid-template-columns: minmax(183px, 1fr);
     font-size: 1.5rem;
-    margin-left: 1rem;
+    margin-left: -29rem;
     bottom: 49px;
   }
 }
 @media screen and (max-width: 1024px) {
   .lightbox__container__title {
-    margin-left: 17px;
+    margin-left: -32rem;
+    background-color: rgba(255, 255, 255, 0.782);
     display: grid;
     grid-template-columns: minmax(183px, 1fr);
-    top: -53px;
-    position: absolute;
+    top: -45rem;
+    position: relative;
   }
 }
 @media screen and (max-width: 859px){
