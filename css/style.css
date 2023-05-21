@@ -658,6 +658,14 @@ form textarea {
 /* END PHOTOGRAPHER CSS PART */
 
 /* MEDIA QUERIES */
+@media screen and (min-width: 678px) {
+  .modal-btn {
+    display: block;
+  }
+  .modal-btn-mobile {
+    display: none;
+  }
+}
 @media screen and (min-width: 1980px) {
   .lightbox__container .lightbox-picture-card {
     width: 50%;
@@ -698,7 +706,7 @@ form textarea {
   .photographer_ID__picture img {
     width: 300px;
     height: 300px;
-    object-fit: fill;
+    object-fit: cover;
   }
   .modal-btn {
     font-size: 1.75rem;
@@ -835,14 +843,7 @@ form textarea {
     font-size: 1rem;
   }
 }
-@media screen and (min-width: 678px) {
-  .modal-btn {
-    display: block;
-  }
-  .modal-btn-mobile {
-    display: none;
-  }
-}
+
 @media screen and (max-width: 690px)  {
   #sticky_footer {
     width: 130px;
