@@ -781,11 +781,11 @@ form textarea {
 }
 @media screen and (max-width: 1024px) {
   .lightbox__container__title {
-    margin-left: -32rem;
+    margin-left: -25rem;
     background-color: rgba(255, 255, 255, 0.782);
     display: grid;
     grid-template-columns: minmax(183px, 1fr);
-    top: -45rem;
+    top: -31rem;
     position: relative;
   }
 }
