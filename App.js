@@ -50,10 +50,19 @@ class App {
       const dialog = document.querySelector(".dialog");
       const main = document.querySelector("#main");
       const closeButton = document.querySelector(".close-btn");
-      buttonModal.addEventListener("click", displayModal);
-      buttonModalMobile.addEventListener("click", displayModal);
+      buttonModal.addEventListener("click", (e) => {
+        e.preventDefault();
+        displayModal()
+      });
+      buttonModalMobile.addEventListener("click", (e) => {
+        e.preventDefault();
+        displayModal()
+      });
 
-      closeButton.addEventListener("click", closeModal);
+      closeButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeModal()
+      } );
 
       function displayModal() {
         dialog.classList.toggle("opened");
@@ -133,10 +142,12 @@ const manageClickOnHeartsBehaviour = () => {
   const $hearts = document.querySelectorAll(".heart");
 
   $hearts.forEach((heart) => {
-    heart.addEventListener("click", () => {
+    heart.addEventListener("click", (e) => {
+      e.preventDefault();
       toggleLikes(heart);
     });
     heart.addEventListener("keypress", (e) => {
+      e.preventDefault();
       if (e.key === "Enter") {
         toggleLikes(heart);
       }
@@ -173,20 +184,24 @@ const manageSorting = (array) => {
   const $optionsVisible = document.querySelectorAll(".dropdown_menu > button");
   let dropdownContent = false;
 
-  $listbox.addEventListener("click", () => {
+  $listbox.addEventListener("click", (e) => {
+    e.preventDefault()
     toggleListbox();
   });
   $listbox.addEventListener("keypress", (e) => {
+    e.preventDefault();
     if (e.key === "Enter") {
       toggleListbox();
     }
   });
 
   $sortingOptions.forEach((element) => {
-    element.addEventListener("click", () => {
+    element.addEventListener("click", (e) => {
+      e.preventDefault();
       manageListbox(element, array);
     });
     element.addEventListener("keypress", (e) => {
+      e.preventDefault();
       if (e.key === "Enter") {
         manageListbox(element, array);
       }
@@ -266,10 +281,12 @@ const mediasCardsLinks = (array) => {
   const $mediasCards = document.querySelectorAll(".media_card__media");
 
   $mediasCards.forEach((card, index) => {
-    card.addEventListener("click", () => {
+    card.addEventListener("click", (e) => {
+      e.preventDefault();
       displayLightbox(array, index);
     });
     card.addEventListener("keypress", (e) => {
+      e.preventDefault();
       if (e.key === "Enter") {
         displayLightbox(array, index);
       }
@@ -290,22 +307,34 @@ const manageLightboxControls = (array) => {
   const $lightboxPreviousButton = document.querySelector(".lightbox__previous");
   const $mediaWrapper = document.querySelector(".lightbox__container");
 
-  $lightboxCloseButton.addEventListener("click", () => closeLightbox(array));
+  $lightboxCloseButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    closeLightbox(array)
+  });
   $lightboxCloseButton.addEventListener("keydown", (e) => {
+    e.preventDefault();
     if (e.key === "Escape") {
       closeLightbox(array);
     }
   });
 
-  $lightboxNextButton.addEventListener("click", () => nextSlide(array));
+  $lightboxNextButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    nextSlide(array);
+  });
   $lightboxNextButton.addEventListener("keydown", (e) => {
+    e.preventDefault();
     if (e.key === "ArrowRight") {
       nextSlide(array);
     }
   });
 
-  $lightboxPreviousButton.addEventListener("click", () => previousSlide(array));
+  $lightboxPreviousButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    previousSlide(array);
+  });
   $lightboxPreviousButton.addEventListener("keydown", (e) => {
+    e.preventDefault();
     if (e.key === "ArrowLeft") {
       previousSlide(array);
     }
