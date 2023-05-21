@@ -68,8 +68,8 @@ h1.main-title {
   transition: 0.3s ease-in-out;
 }
 .badge-card {
-  height: 200px;
-  width: 200px;
+  height: 300px;
+  width: 300px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -133,6 +133,7 @@ h1.main-title {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 10px 0;
   gap: 5px;
 }
 .photographer_ID__picture img {
@@ -596,41 +597,42 @@ form textarea {
   font-size: 42px;
 }
 .lightbox__container, .lightbox__container.second {
-  width: 60%;
+  width: 75%;
   position: relative;
-  top: 70px;
+  top: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 25em;
-  /* margin-right: 60px; */
-  min-height: 85vh;
+  margin: auto;
+  min-height: 95vh;
 }
 .lightbox__container.second {
   min-height: 5vh;
 }
 .lightbox__container .lightbox-picture-card {
-  width: 40em;
-  height: 84vh;
+  width: 100%;
+  min-height: 40vh;
+  max-height: 83vh;
+  object-fit: cover;
   animation: lightboxIn 0.5s;
 }
 .lightbox__container .lightbox-video-card {
-  height: 26vh;
+  height: calc(28vh - 10vh);
 }
 .lightbox__container__title {
   width: 100%;
-  height: 5vh;
-  margin-left: 10.5em;
   padding: 0;
-  font-size: 24px;
+  font-size: 1.8rem;
   font-weight: 600;
   line-height: 50px;
   color: #911c1c;
-  position: relative;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  /* justify-content: start; */
+  position: fixed;
+}
+.lightbox__container__title {
+  margin-left: -11rem;
+  display: grid;
+  grid-template-columns: minmax(183px, 1fr);
+  bottom: 202px;
 }
 .lightbox__next,
 .lightbox__previous {
@@ -658,6 +660,29 @@ form textarea {
 /* END PHOTOGRAPHER CSS PART */
 
 /* MEDIA QUERIES */
+@media screen and (min-width: 1980px) {
+  .lightbox__container .lightbox-picture-card {
+    width: 50%;
+  }
+  .lightbox__container .lightbox-video-card {
+    height: 100%;
+  }
+  .lightbox__container__title {
+    margin-left: 24rem;
+    font-size: 30px;
+    bottom: 10px;
+  }
+}
+@media screen and (min-width: 2025px) {
+  .lightbox__container .lightbox-picture-card {
+    width: 100%;
+  }
+  .lightbox__container__title {
+    margin-left: 2rem;
+    font-size: 30px;
+    bottom: 10px;
+  }
+}
 @media screen and (min-width: 1920px) {
   .photographer_ID {
     padding: 2% 4%;
@@ -694,9 +719,6 @@ form textarea {
     width: 360px;
     font-size: 2rem;
   }
-  .lightbox__container .lightbox-video-card {
-    height: 38.3vh;
-  }
 }
 @media screen and (max-width: 1919px) {
   #main {
@@ -719,6 +741,7 @@ form textarea {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 60px;
     row-gap: 50px;
+    height: 90vh;
   }
   .media_card__container {
     row-gap: 15px;
@@ -733,24 +756,43 @@ form textarea {
     bottom: -42px;
   }
 }
-@media screen and (max-width: 1024px) {
+@media screen and (min-width: 1024px) {
   .media_card__footer, .media_card__footer .media_card__title {
- font-size: 1rem;
+    font-size: 1.5rem;
+  }
+  .lightbox__container, .lightbox__container.second {
+    top: 32px;
+    width: 42%;
+  }
+  .lightbox__container .lightbox-picture-card {
+    width: calc(100% - 10px);
+    height: calc(60vh + 26vh);
+    object-fit: cover;
+  }
+  .lightbox__container .lightbox-video-card {
+    height: calc(10vh + 50vh);
+  }
+  .lightbox__container__title {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(183px, 1fr);
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    bottom: 49px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .lightbox__container__title {
+    margin-left: 17px;
+    display: grid;
+    grid-template-columns: minmax(183px, 1fr);
+    top: -53px;
+    position: absolute;
   }
 }
 @media screen and (max-width: 859px){
   .media_card {
     width: 44vw;
-  }
-  .lightbox__container .lightbox-picture-card {
-    width: 31em;
-    height: 85vh;
-  }
-  .lightbox__container, .lightbox__container .second {
-    margin-left: 10em;
-  }
-  .lightbox__container__title {
-    margin-left: -20.2em;
   }
 }
 @media screen and (max-width: 768px) {
@@ -809,23 +851,6 @@ form textarea {
     font-size: .8rem;
     padding: .4rem .5rem;
     line-height: 1;
-  }
-  .lightbox__container, .lightbox__container .second {
-    width: 62%;
-    top: 135px;
-    margin-left: 7em;
-    min-height: 68vh;
-  }
-  .lightbox__container .lightbox-picture-card {
-    min-width: 30em;
-    height: 55vh;
-    object-fit: fill;
-  }
-  .lightbox__container .lightbox-video-card {
-    height: 30vh;
-  }
-  .lightbox__container__title {
-    margin-left: -28.9em;
   }
 }
 @media screen and (max-width: 600px) {
@@ -911,32 +936,6 @@ form textarea {
   .lightbox__previous {
     font-size: 29px;
   }
-  .lightbox__container .lightbox-picture-card {
-    height: 49vh;
-    min-width: 21em;
-    object-fit: fill;
-  }
-  .lightbox__container .lightbox-video-card {
-    width: 65vw;
-  }
-  .lightbox__container {
-    position: relative;
-    top: 243px;
-    display: flex;
-    align-items: center;
-    margin-left: 90px;
-    margin-right: 60px;
-    min-height: 45vh;
-}
-.lightbox__container.second {
-  min-height: 40vh;
-}
-  .lightbox__container__title {
-    width: 100%;
-    font-size: 1rem;
-    position: relative;
-    left: -11em;
-  }
   #sticky_footer {
     padding: 0.4rem 0.3rem 0.2rem 0.3rem;
     font-size: 0.8rem;
@@ -967,16 +966,5 @@ form textarea {
   .photographer_ID__picture img {
     width: 130px;
     height: 130px;
-  }
-  .lightbox__container .lightbox-picture-card {
-    min-width: 14em;
-    height: 30vh;
-  }
-  .lightbox__container, .lightbox__container .second {
-    margin-left: 4em;
-  }
-  .lightbox__container__title {
-    top: -5.5em;
-    margin-left: -52.5em;
   }
 }
