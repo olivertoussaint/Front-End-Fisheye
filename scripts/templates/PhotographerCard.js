@@ -10,7 +10,6 @@ class PhotographerCard {
     $link.setAttribute("tabindex", "0");
     $link.setAttribute("aria-label", this._photographer.name);
     $link.setAttribute("title", `portfolio de ${this._photographer.name}`);
-    $link.setAttribute("alt", "#");
 
     const $img = document.createElement("img");
     $img.classList.add("badge-card");
@@ -25,6 +24,7 @@ class PhotographerCard {
     $link.appendChild($name);
 
     $link.addEventListener("keypress", (e) => {
+      e.preventDefault()
       if (e.key === "Enter") {
         window.location.href = `photographer.html?photographer=${this._photographer.id}`;
       }
